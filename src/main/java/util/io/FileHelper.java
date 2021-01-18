@@ -25,6 +25,11 @@ public class FileHelper {
         }
         return outputString.toString();
     }
+    public static String getFileExtension(String inputFileName) {
+        if (inputFileName.lastIndexOf(".") != -1 && inputFileName.lastIndexOf(".") != 0)
+            return inputFileName.substring(inputFileName.lastIndexOf(".") + 1);
+        else return " ";
+    }
 
 }
     //запись и чтение в файл и из файла FileWriter и FileReader
