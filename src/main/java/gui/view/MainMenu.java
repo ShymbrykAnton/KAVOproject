@@ -1,22 +1,50 @@
 package gui.view;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 
 public class MainMenu {
     JFrame frame;
-    JTable table;
-    JLabel label, label1, label2, label3, label4, label5;
+    JLabel myTableLabel, label, label1, label2, label3, label4, label5;
     JTextField tf1, tf2, tf3, tf4, tf5;
-    JTextArea textArea;
     JButton button1,button2,button3;
-    public Object[][] array = new String[][]{{"1", "Mike", "Kozlow", "24", "Kharkov"}}; // тут Персона будет записываться
-    public Object[] columnNames = new String[]{"Id", "First name", "Last name", "Age", "City"};
+//    public Object[][] array = new String[][]{{"1", "Mike", "Kozlow", "24", "Kharkov"}}; // тут Персона будет записываться
+//    public Object[] columnNames = new String[]{"Id", "First name", "Last name", "Age", "City"};
+    public DefaultTableModel tableModel = new DefaultTableModel(new Object[][] {
+            { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+        { "1", "Mike", "Kozlow", "24", "Kharkov" },
+},
+        new Object[] { "Id", "First name", "Last name", "Age", "City" });
+
+    public static JTable myTable;
 
     public MainMenu() {
+
         frame = new JFrame("CRUD by KABO");
         label = new JLabel("Control Panel");
+        myTableLabel = new JLabel("TABLE");
+        myTable = new JTable(tableModel);
+//        myTable = new JTable(array,columnNames);
+        myTable.setFillsViewportHeight(true);
+        JScrollPane scrollPane = new JScrollPane(myTable);
 
+
+
+        myTableLabel.setBounds(185,150,100,30);
         label.setBounds(550, 150, 100, 30);
         label1 = new JLabel("Id: ");
         label1.setBounds(400, 200, 50, 30);
@@ -46,13 +74,10 @@ public class MainMenu {
         button3 = new JButton("Delete");//creating instance of JButton
         button3.setBounds(650, 350, 100, 40);
 
-
-        table = new JTable(array, columnNames);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 800);
-        table.setBounds(25, 250, 300, 400);
-
-        frame.add(table);
+        frame.add(scrollPane);
+        frame.pack();
+        scrollPane.setBounds(50,200,300,200);
+        frame.add(myTableLabel);
         frame.add(label);
         frame.add(label1);
         frame.add(label2);
@@ -69,8 +94,15 @@ public class MainMenu {
         frame.add(button3);
         frame.setLayout(null);
         frame.setVisible(true);
-        table.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1000, 800);
+
     }
+
+
+
+
+
 
 
 //    JFrame frame = new JFrame("fdshjgkdjfs");
