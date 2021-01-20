@@ -21,7 +21,17 @@ public class StringProcessor implements Executable {
     @Override
     public List<Person> read(String fileName) throws IOException {
         return converter.getPersonsFromString(fileHelper.readFromFile(fileName));
-    }}
+    }
+
+    {
+
+    }
+
+    @Override
+    public void delete(long id) throws IOException, ClassNotFoundException {
+
+    }
+}
 
 
 

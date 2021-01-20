@@ -31,7 +31,12 @@ public class BinaryProcessor implements Executable {
                 System.out.println(ex.getMessage());
 
                 return newPerson;
-            }
-            //через инпут аутпут стримы обработка (создание, чтение, апдейт, делит) бинарного файла
-            ///лл
-        }}
+
+
+            }}
+
+    @Override
+    public void delete(long id) throws IOException, ClassNotFoundException {
+
+    }
+}

@@ -19,6 +19,12 @@ public class Constants {
             public final static String HELP = "help";
             public final static String SWITCH = "switch";
             public final static String START = "start";
-        }
-    }
+
+
+            public static String ENTER_FIRST_NAME = "Enter First Name:";
+            public static String ENTER_LAST_NAME = "Enter  Last Name:";
+            public static String ENTER_CITY = "Enter City:";
+            public static String ENTER_ID = "Enter id:";
+            public static String ENTER_AGE = "Enter age:";
+        }}
     //В этом проекте думаю надо будет практически весь текст в константы писать попробывать
