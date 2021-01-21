@@ -1,3 +1,4 @@
+
 import gui.view.MainMenu;
 
 public class Main {
