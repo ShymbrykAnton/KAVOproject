@@ -2,33 +2,43 @@ package util.io;
 
 import java.io.*;
 
+import static util.Constants.View.*;
+
 public class FileHelper {
-    public void saveToFile(String content, String fileName) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false));
-        writer.write(content);
-        writer.close();
-
+    public boolean fileExists() {
+        File tempFile = new File(filename);
+        return tempFile.exists();
     }
 
-    public String readFromFile(String fileName) throws IOException {
-        StringBuilder outputString = new StringBuilder();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                outputString.append(line);
-
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+    public boolean isFileEmpty(){
+        File file = new File(filename);
+        if (file.length() != 0){
+            return false;
+        } else{
+            return true;
         }
-        return outputString.toString();
     }
-    public static String getFileExtension(String inputFileName) {
-        if (inputFileName.lastIndexOf(".") != -1 && inputFileName.lastIndexOf(".") != 0)
-            return inputFileName.substring(inputFileName.lastIndexOf(".") + 1);
-        else return " ";
+
+    public void writeToFile(String input) throws IOException {
+        try (FileWriter fileWriter = new FileWriter(filename)) {
+
+            fileWriter.write(input);
+            fileWriter.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getFile() throws IOException {
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
+        }
+        return resultStringBuilder.toString();
     }
 
 }

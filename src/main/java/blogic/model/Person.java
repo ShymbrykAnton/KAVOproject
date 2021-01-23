@@ -3,6 +3,8 @@ package blogic.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import static util.Constants.View.*;
+
 public class Person implements Serializable {
     private long id;
     private String fName;
@@ -75,7 +77,8 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Id: " + id + ". First Name: " + fName + ". Last Name: " + lName + ". Age: " + age + ". City: " + city;
+        return String.format("%s: %s. %s: %s. %s: %s. %s: %s. %s: %s.",
+                ID, id, FIRST_NAME, fName, LAST_NAME, lName, AGE, age, CITY, city);
     }
 
     @Override
