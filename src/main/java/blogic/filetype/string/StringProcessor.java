@@ -4,36 +4,50 @@ import blogic.filetype.executor.Executable;
 import blogic.filetype.string.fileTypeConverter.IFileTypeConverter;
 import util.io.FileHelper;
 import blogic.model.Person;
+
 import java.util.List;
 
 import java.io.IOException;
 
+import static util.Constants.Config.*;
+
 public class StringProcessor implements Executable {
-    private final FileHelper fileHelper=new FileHelper();
+    private final FileHelper fileHelper = new FileHelper();
     private final IFileTypeConverter converter;
-    public StringProcessor(IFileTypeConverter converter){this.converter=converter;}
+
+    public StringProcessor(IFileTypeConverter converter) {
+        this.converter = converter;
+    }
+
 
     @Override
-    public void write(String fileName, List<Person> personList) throws IOException {
-        fileHelper.saveToFile(converter.getStrFromPersons(personList), fileName);
+    public void create(String fileName, List<Person> persons) {
+        String personsStr = converter.getStrFromPersons(persons);
+        try {
+            fileHelper.writeToFile(personsStr);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public List<Person> read(String fileName) throws IOException {
-        return converter.getPersonsFromString(fileHelper.readFromFile(fileName));
-    }
-
-    {
-
+    public List<Person> read(String fileName) {
+        String content = null;
+        try {
+            content = fileHelper.getFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return converter.getPersonsFromString(content);
     }
 
     @Override
-    public void delete(long id) throws IOException, ClassNotFoundException {
+    public void update(long id, String [] updatingTypeValue, String[] newValue) {
+        personList = converter.updateDataInPerson(id, updatingTypeValue, newValue);
+    }
 
+    @Override
+    public void delete(long id) {
+        personList = converter.removePersonsFromList(id);
     }
 }
-
-
-
-
-    // связь конвертера с файлхелпером. Обработка стринговых типов данных
