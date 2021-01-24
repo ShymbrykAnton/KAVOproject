@@ -6,27 +6,27 @@ import util.io.FileHelper;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
 
 
 import static gui.buttonListeners.ChooseDataSourceButtonListener.executable;
-import static util.Constants.View.*;
+import static gui.view.MainMenu.table;
+import static util.Constants.Config.*;
 
 public class CreateNewRecordButtonListener implements ActionListener {
     private final FileHelper fileHelper = new FileHelper();
     private final JTextField idTextField;
-    private final JTextField fnameTextField;
-    private final JTextField lnameTextField;
+    private final JTextField fNameTextField;
+    private final JTextField lNameTextField;
     private final JTextField ageTextField;
     private final JTextField cityTextField;
 
-    public CreateNewRecordButtonListener(JTextField idTextField, JTextField fnameTextField,
-                                         JTextField lnameTextField, JTextField ageTextField,
+    public CreateNewRecordButtonListener(JTextField idTextField, JTextField fNameTextField,
+                                         JTextField lNameTextField, JTextField ageTextField,
                                          JTextField cityTextField) {
         this.idTextField = idTextField;
-        this.fnameTextField = fnameTextField;
-        this.lnameTextField = lnameTextField;
+        this.fNameTextField = fNameTextField;
+        this.lNameTextField = lNameTextField;
         this.ageTextField = ageTextField;
         this.cityTextField = cityTextField;
     }
@@ -34,32 +34,24 @@ public class CreateNewRecordButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         long id = Long.parseLong(idTextField.getText());
-        String firstName = fnameTextField.getText();
-        String lastName = lnameTextField.getText();
+        String firstName = fNameTextField.getText();
+        String lastName = lNameTextField.getText();
         int age = Integer.parseInt(ageTextField.getText());
         String city = cityTextField.getText();
 
         if (!fileHelper.fileExists()) {
             personList = new ArrayList<>();
-        }
-
-        try {
+        } else {
             personList = executable.read(filename);
-        } catch (IOException | ClassNotFoundException ioException) {
-            ioException.printStackTrace();
         }
 
         personList.add(new Person(id, firstName, lastName, age, city));
-
-        try {
-            executable.create(filename, personList);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
+        executable.create(filename, personList);
+        table.redrawTable();
 
         idTextField.setText("");
-        fnameTextField.setText("");
-        lnameTextField.setText("");
+        fNameTextField.setText("");
+        lNameTextField.setText("");
         ageTextField.setText("");
         cityTextField.setText("");
     }

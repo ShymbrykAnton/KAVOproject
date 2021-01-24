@@ -15,10 +15,10 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(long id, String fName, String lname, int age, String city) {
+    public Person(long id, String fName, String lName, int age, String city) {
         this.id = id;
         this.fName = fName;
-        this.lName = lname;
+        this.lName = lName;
         this.age = age;
         this.city = city;
     }
@@ -85,5 +85,4 @@ public class Person implements Serializable {
     public int hashCode() {
         return Objects.hash(id, fName, lName, age, city);
     }
-
 }

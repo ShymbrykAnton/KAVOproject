@@ -2,7 +2,7 @@ package util.io;
 
 import java.io.*;
 
-import static util.Constants.View.*;
+import static util.Constants.Config.*;
 
 public class FileHelper {
     public boolean fileExists() {
@@ -10,11 +10,11 @@ public class FileHelper {
         return tempFile.exists();
     }
 
-    public boolean isFileEmpty(){
+    public boolean isFileEmpty() {
         File file = new File(filename);
-        if (file.length() != 0){
+        if (file.length() != 0) {
             return false;
-        } else{
+        } else {
             return true;
         }
     }
@@ -40,8 +40,4 @@ public class FileHelper {
         }
         return resultStringBuilder.toString();
     }
-
 }
-    //запись и чтение в файл и из файла FileWriter и FileReader
-    //проверка на существование файла (метод exists класса File по имени файла)
-    //проверка на то пустой ли файл по его длине

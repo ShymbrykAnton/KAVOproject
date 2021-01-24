@@ -9,7 +9,7 @@ import java.util.List;
 
 import java.io.IOException;
 
-import static util.Constants.View.*;
+import static util.Constants.Config.*;
 
 public class StringProcessor implements Executable {
     private final FileHelper fileHelper = new FileHelper();
@@ -21,35 +21,33 @@ public class StringProcessor implements Executable {
 
 
     @Override
-    public void create(String fileName, List<Person> persons) throws IOException {
+    public void create(String fileName, List<Person> persons) {
         String personsStr = converter.getStrFromPersons(persons);
-        fileHelper.writeToFile(personsStr);
+        try {
+            fileHelper.writeToFile(personsStr);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public List<Person> read(String fileName) throws IOException{
-        String content = fileHelper.getFile();
+    public List<Person> read(String fileName) {
+        String content = null;
+        try {
+            content = fileHelper.getFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return converter.getPersonsFromString(content);
     }
 
     @Override
-    public void update(long id, String valueToBeUpdated, String valueToChange) throws IOException {
-        List<Person> person = read(filename);
-        String content = converter.getStrFromPersons(person);
-        personList = converter.updateDataInPerson(id, valueToBeUpdated, valueToChange, content);
+    public void update(long id, String [] updatingTypeValue, String[] newValue) {
+        personList = converter.updateDataInPerson(id, updatingTypeValue, newValue);
     }
 
     @Override
     public void delete(long id) {
-        try {
-            personList = read(filename);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String content = converter.getStrFromPersons(personList);
-        personList = converter.removePersonsFromList(id, content);
+        personList = converter.removePersonsFromList(id);
     }
 }
-
-
-// связь конвертера с файлхелпером. Обработка стринговых типов данных

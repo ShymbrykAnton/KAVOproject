@@ -3,25 +3,26 @@ package gui.buttonListeners;
 import blogic.filetype.executor.Executable;
 import blogic.filetype.executor.factory.FileTypeFactory;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static gui.view.MainMenu.table;
 import static util.Constants.View.*;
+import static util.Constants.DataSource.*;
+import static util.Constants.Config.*;
+import static util.Constants.Messages.*;
 
 
 public class ChooseDataSourceButtonListener implements ActionListener {
-    final Menu item;
     private final MenuBar menuBar;
-    Menu yourFileName = new Menu();
+    private final Menu yourFileName = new Menu();
     public static String format = "";
     public static Executable executable;
     private final FileTypeFactory fileTypeFactory = new FileTypeFactory();
 
-    public ChooseDataSourceButtonListener(Menu item, MenuBar menuBar) {
-        this.item = item;
+    public ChooseDataSourceButtonListener(MenuBar menuBar) {
         this.menuBar = menuBar;
     }
 
@@ -30,57 +31,51 @@ public class ChooseDataSourceButtonListener implements ActionListener {
         String dataSource = e.getActionCommand();
         switch (dataSource) {
             case MY_SQL:
-                format = "MySql";
+                format = MY_SQL;
                 break;
             case POSTGRE_SQL:
-                format = "PostgreSQL";
+                format = POSTGRE_SQL;
                 break;
             case H2:
-                format = "H2";
+                format = H2;
                 break;
             case MONGO_DB:
-                format = "MongoDB";
+                format = MONGO_DB;
                 break;
             case REDIS:
-                format = "Redis";
+                format = REDIS;
                 break;
             case CASSANDRA:
-                format = "Cassandra";
+                format = CASSANDRA;
                 break;
             case GRAPH_DB:
-                format = "GraphDB";
+                format = GRAPH_DB;
                 break;
             case BINARY:
-                format = "bin";
+                format = BINARY_TYPE;
                 break;
             case JSON:
-                format = "json";
+                format = JSON_TYPE;
                 break;
             case CSV:
-                format = "csv";
+                format = CSV_TYPE;
                 break;
             case XML:
-                format = "xml";
+                format = XML_TYPE;
                 break;
             case YAML:
-                format = "yaml";
+                format = YAML_TYPE;
                 break;
-            default:
-                throw new IllegalArgumentException("ЕРРОР");
         }
-        JLabel label = new JLabel("sdgsdg");
-        String input = JOptionPane.showInputDialog(label, ENTER_FILENAME,
-                "Choose your filename", JOptionPane.INFORMATION_MESSAGE);
-        if (input == null) {
+        String input = JOptionPane.showInputDialog(new JLabel(), ENTER_FILENAME,
+                CHOOSE_FILENAME, JOptionPane.INFORMATION_MESSAGE);
+        if (input == null || input.equals("")) {
             return;
         }
-        if (input.equals("")) {
-            return;
-        }
-        filename = String.format("%s.%s", input, format);
-        yourFileName.setLabel(String.format("Your file: %s", filename));
+        filename = String.format(FILE_FORMAT, input, format);
+        yourFileName.setLabel(String.format(YOUR_FILE, filename));
         menuBar.add(yourFileName);
         executable = fileTypeFactory.getInstance();
-
+        table.redrawTable();
     }
 }
