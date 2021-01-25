@@ -12,14 +12,10 @@ public class FileHelper {
 
     public boolean isFileEmpty() {
         File file = new File(filename);
-        if (file.length() != 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return file.length() == 0;
     }
 
-    public void writeToFile(String input) throws IOException {
+    public void writeToFile(String input) {
         try (FileWriter fileWriter = new FileWriter(filename)) {
 
             fileWriter.write(input);
@@ -30,13 +26,15 @@ public class FileHelper {
         }
     }
 
-    public String getFile() throws IOException {
+    public String getFile()  {
         StringBuilder resultStringBuilder = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
                 resultStringBuilder.append(line).append("\n");
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return resultStringBuilder.toString();
     }

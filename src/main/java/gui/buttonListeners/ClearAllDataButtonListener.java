@@ -18,7 +18,7 @@ public class ClearAllDataButtonListener implements ActionListener {
         JLabel confirmLabel = new JLabel(CLEAR_FILE);
         int option = JOptionPane.showConfirmDialog(confirmLabel,
                 String.format(CLEAR_WARNING, filename));
-        if (option == 0) {
+        if (option == JOptionPane.YES_OPTION) {
             personList = new ArrayList<>();
             executable.create(filename, personList);
             table.redrawTable();

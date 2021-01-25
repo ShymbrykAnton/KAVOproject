@@ -32,15 +32,15 @@ public class Table {
 
         DefaultTableModel defaultTableModel = new DefaultTableModel(new Object[][]{},
                 new Object[]{ID, FIRST_NAME, LAST_NAME, AGE, CITY});
-        for(Person p : personList) {
-            defaultTableModel.addRow(new String[]{String.valueOf(p.getId()),p.getFName(),p.getLName(),p.getCity(),String.valueOf(p.getAge())});
+        for (Person person : personList) {
+            defaultTableModel.addRow(new String[]{String.valueOf(person.getId()), person.getFName(), person.getLName(), String.valueOf(person.getAge()), person.getCity()});
         }
         JTable defaultTable = new JTable(defaultTableModel);
         defaultTable.setFillsViewportHeight(true);
         scrollPane = new JScrollPane(defaultTable,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setBounds(50, 100, 300, 200);
+        scrollPane.setBounds(50, 100, 400, 200);
         frame.add(scrollPane);
     }
 

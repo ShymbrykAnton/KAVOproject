@@ -7,7 +7,6 @@ import blogic.model.Person;
 
 import java.util.List;
 
-import java.io.IOException;
 
 import static util.Constants.Config.*;
 
@@ -22,23 +21,12 @@ public class StringProcessor implements Executable {
 
     @Override
     public void create(String fileName, List<Person> persons) {
-        String personsStr = converter.getStrFromPersons(persons);
-        try {
-            fileHelper.writeToFile(personsStr);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fileHelper.writeToFile(converter.getStrFromPersons(persons));
     }
 
     @Override
     public List<Person> read(String fileName) {
-        String content = null;
-        try {
-            content = fileHelper.getFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return converter.getPersonsFromString(content);
+        return converter.getPersonsFromString(fileHelper.getFile());
     }
 
     @Override
