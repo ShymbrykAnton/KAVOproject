@@ -27,61 +27,61 @@ public class MainMenu extends Component {
         frame = new JFrame(PROGRAM_NAME);
         table = new Table(frame);
         mb = new MenuBar();
-        frame.setJMenuBar(new JMenuBar());
+//        frame.setJMenuBar(new JMenuBar());
 
         tableLabel = new JLabel(FILE_CONTENTS);
-        tableLabel.setBounds(185, 50, 100, 30);
+        tableLabel.setBounds(200, 50, 100, 30);
 
         controlPanelLabel = new JLabel(CONTROL_PANEL);
-        controlPanelLabel.setBounds(550, 50, 100, 30);
+        controlPanelLabel.setBounds(650, 50, 100, 30);
 
         idLabel = new JLabel(String.format(LABEL_FORMAT, ID));
-        idLabel.setBounds(400, 100, 50, 30);
+        idLabel.setBounds(500, 100, 50, 30);
         idTextField = new JTextField();
-        idTextField.setBounds(450, 100, 300, 30);
+        idTextField.setBounds(550, 100, 300, 30);
 
         fNameLabel = new JLabel(String.format(LABEL_FORMAT, FIRST_NAME));
-        fNameLabel.setBounds(400, 130, 50, 30);
+        fNameLabel.setBounds(500, 130, 50, 30);
         fNameTextField = new JTextField();
-        fNameTextField.setBounds(450, 130, 300, 30);
+        fNameTextField.setBounds(550, 130, 300, 30);
 
         lNameLabel = new JLabel(String.format(LABEL_FORMAT, LAST_NAME));
-        lNameLabel.setBounds(400, 160, 50, 30);
+        lNameLabel.setBounds(500, 160, 50, 30);
         lNameTextField = new JTextField();
-        lNameTextField.setBounds(450, 160, 300, 30);
+        lNameTextField.setBounds(550, 160, 300, 30);
 
         ageLabel = new JLabel(String.format(LABEL_FORMAT, AGE));
-        ageLabel.setBounds(400, 190, 50, 30);
+        ageLabel.setBounds(500, 190, 50, 30);
         ageTextField = new JTextField();
-        ageTextField.setBounds(450, 190, 300, 30);
+        ageTextField.setBounds(550, 190, 300, 30);
 
         cityLabel = new JLabel(String.format(LABEL_FORMAT, CITY));
-        cityLabel.setBounds(400, 220, 50, 30);
+        cityLabel.setBounds(500, 220, 50, 30);
         cityTextField = new JTextField();
-        cityTextField.setBounds(450, 220, 300, 30);
+        cityTextField.setBounds(550, 220, 300, 30);
 //////////////////////////////Создание кнопок//////////////////////////////////////////////
         buttonCreate = new JButton(CREATE);//creating instance of JButton
-        buttonCreate.setBounds(450, 250, 100, 40);
+        buttonCreate.setBounds(550, 250, 100, 40);
         ActionListener createActionListener = new CreateNewRecordButtonListener(idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField);
         buttonCreate.addActionListener(createActionListener);
 
         buttonUpdate = new JButton(UPDATE);//creating instance of JButton
-        buttonUpdate.setBounds(550, 250, 100, 40);
+        buttonUpdate.setBounds(650, 250, 100, 40);
         ActionListener updateActionListener = new UpdateRecordButtonListener(idTextField,fNameTextField,lNameTextField,ageTextField,cityTextField);
         buttonUpdate.addActionListener(updateActionListener);
 
         buttonDelete = new JButton(DELETE);//creating instance of JButton
-        buttonDelete.setBounds(650, 250, 100, 40);
+        buttonDelete.setBounds(750, 250, 100, 40);
         ActionListener deleteActionListener = new DeleteRecordButtonListener(idTextField);
         buttonDelete.addActionListener(deleteActionListener);
 
         buttonClearAll = new JButton(CLEAR_ALL);
-        buttonClearAll.setBounds(50, 450, 100, 75);
+        buttonClearAll.setBounds(50, 450, 100, 50);
         ActionListener clearAllActionListener = new ClearAllDataButtonListener();
         buttonClearAll.addActionListener(clearAllActionListener);
 
         buttonExit = new JButton(EXIT);
-        buttonExit.setBounds(625, 450, 100, 75);
+        buttonExit.setBounds(725, 450, 100, 50);
         ActionListener exitActionListener = new ExitButtonListener();
         buttonExit.addActionListener(exitActionListener);
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,9 +140,9 @@ public class MainMenu extends Component {
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(900, 600);
         frame.setLocationRelativeTo(null);
-        frame.getContentPane().setBackground(Color.WHITE);
+//        frame.getContentPane().setBackground(Color.WHITE);
 
 //////////////////////////////////Закрытие приложения через "крестик"/////////////////////
 //        frame.addWindowListener(new WindowAdapter() {
@@ -167,9 +167,3 @@ public class MainMenu extends Component {
 //            System.exit(0);
 //        }
 }
-
-
-
-
-
-

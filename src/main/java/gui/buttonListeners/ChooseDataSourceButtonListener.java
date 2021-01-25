@@ -72,6 +72,7 @@ public class ChooseDataSourceButtonListener implements ActionListener {
         if (input == null || input.equals("")) {
             return;
         }
+        //TODO вынести вот это(во всех листенерах) в отдельный метод
         filename = String.format(FILE_FORMAT, input, format);
         yourFileName.setLabel(String.format(YOUR_FILE, filename));
         menuBar.add(yourFileName);

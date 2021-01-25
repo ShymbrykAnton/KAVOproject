@@ -35,6 +35,7 @@ public class UpdateRecordButtonListener implements ActionListener {
         String lName = lNameTextField.getText();
         String age = ageTextField.getText();
         String city = cityTextField.getText();
+        // todo перенос массива типов полей в метод апдейт
         String[] updatingTypeValue = new String[5];
         if (!id.equals("")) {
             updatingTypeValue[0] = ID;
