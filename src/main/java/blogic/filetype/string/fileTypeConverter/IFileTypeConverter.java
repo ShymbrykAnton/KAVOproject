@@ -14,7 +14,7 @@ public interface IFileTypeConverter {
 
     List<Person> getPersonsFromString(String strPersons);
 
-    default List<Person> updateDataInPerson(long id, String [] updatingTypeValue, String[] newValue) {
+    default List<Person> updateDataInPerson(long id, String[] updatingTypeValue, String[] newValue) {
         BinaryProcessor.updating(id, updatingTypeValue, newValue);
         return personList;
     }

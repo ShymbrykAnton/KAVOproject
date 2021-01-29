@@ -57,7 +57,7 @@ public class CsvConverter implements IFileTypeConverter {
         }
         while (i < personsArray.size()) {
             String[] value = personsArray.get(i);
-            Person person = new Person(Long.parseLong(value[0]), value[1], value[2], Integer.parseInt(value[3]), value[4]);
+            Person person = new Person(Long.parseLong(value[0]), value[1], value[2], Byte.parseByte(value[3]), value[4]);
             persons.add(person);
             i++;
         }

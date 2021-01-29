@@ -46,11 +46,11 @@ public class BinaryProcessor implements Executable {
     }
 
     @Override
-    public void update(long id, String [] updatingTypeValue, String[] newValue) {
+    public void update(long id, String[] updatingTypeValue, String[] newValue) {
         updating(id, updatingTypeValue, newValue);
     }
 
-    public static void updating(long id, String [] updatingTypeValue, String[] newValue) {
+    public static void updating(long id, String[] updatingTypeValue, String[] newValue) {
         Iterator<Person> iterator = personList.iterator();
         Person newPerson = new Person();
         int personIndex = 0;
@@ -72,7 +72,7 @@ public class BinaryProcessor implements Executable {
                                 newPerson.setLName(newValue[count]);
                                 break;
                             case AGE:
-                                newPerson.setAge(Integer.parseInt(newValue[count]));
+                                newPerson.setAge(Byte.parseByte((newValue[count])));
                                 break;
                             case CITY:
                                 newPerson.setCity(newValue[count]);
