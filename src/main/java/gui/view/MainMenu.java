@@ -67,7 +67,7 @@ public class MainMenu extends Component {
 
         buttonUpdate = new JButton(UPDATE);//creating instance of JButton
         buttonUpdate.setBounds(650, 250, 100, 40);
-        ActionListener updateActionListener = new UpdateRecordButtonListener(idTextField,fNameTextField,lNameTextField,ageTextField,cityTextField);
+        ActionListener updateActionListener = new UpdateRecordButtonListener(idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField);
         buttonUpdate.addActionListener(updateActionListener);
 
         buttonDelete = new JButton(DELETE);//creating instance of JButton

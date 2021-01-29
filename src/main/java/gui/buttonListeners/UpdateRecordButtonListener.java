@@ -1,5 +1,7 @@
 package gui.buttonListeners;
 
+import util.io.FileHelper;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +13,7 @@ import static util.Constants.Config.personList;
 import static util.Constants.View.*;
 
 public class UpdateRecordButtonListener implements ActionListener {
+    private final FileHelper fileHelper;
     private final JTextField idTextField;
     private final JTextField fNameTextField;
     private final JTextField lNameTextField;
@@ -25,6 +28,7 @@ public class UpdateRecordButtonListener implements ActionListener {
         this.lNameTextField = lNameTextField;
         this.ageTextField = ageTextField;
         this.cityTextField = cityTextField;
+        fileHelper = new FileHelper();
     }
 
     @Override
@@ -34,6 +38,8 @@ public class UpdateRecordButtonListener implements ActionListener {
         String fName = fNameTextField.getText();
         String lName = lNameTextField.getText();
         String age = ageTextField.getText();
+        byte ageValid = Byte.parseByte(age);
+        fileHelper.ageValidation(ageValid);
         String city = cityTextField.getText();
         // todo перенос массива типов полей в метод апдейт
         String[] updatingTypeValue = new String[5];

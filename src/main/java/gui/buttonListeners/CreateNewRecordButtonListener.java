@@ -1,6 +1,7 @@
 package gui.buttonListeners;
 
 import blogic.model.Person;
+import util.Constants;
 import util.io.FileHelper;
 
 import javax.swing.*;
@@ -34,9 +35,11 @@ public class CreateNewRecordButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         long id = Long.parseLong(idTextField.getText());
+        fileHelper.idValidation(personList, id);
         String firstName = fNameTextField.getText();
         String lastName = lNameTextField.getText();
-        int age = Integer.parseInt(ageTextField.getText());
+        byte age = Byte.parseByte((ageTextField.getText()));
+        fileHelper.ageValidation(age);
         String city = cityTextField.getText();
 
         if (!fileHelper.fileExists()) {

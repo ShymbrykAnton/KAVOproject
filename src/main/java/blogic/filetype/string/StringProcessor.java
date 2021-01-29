@@ -30,7 +30,7 @@ public class StringProcessor implements Executable {
     }
 
     @Override
-    public void update(long id, String [] updatingTypeValue, String[] newValue) {
+    public void update(long id, String[] updatingTypeValue, String[] newValue) {
         personList = converter.updateDataInPerson(id, updatingTypeValue, newValue);
     }
 
