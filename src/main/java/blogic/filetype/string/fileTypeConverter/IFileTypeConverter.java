@@ -1,7 +1,26 @@
 package blogic.filetype.string.fileTypeConverter;
 
+import blogic.filetype.binary.BinaryProcessor;
+import blogic.model.Person;
+
+import java.util.List;
+
+import static util.Constants.Config.*;
+
+
 public interface IFileTypeConverter {
-    //здесь так же как и в предидущем проекте (в первом методе переводим лист персон в строку требуемого формата(запись), во втором - переводим строку
-    // в лист персон(чтение), в третьем апдейт (по значениям которые с батонлистенера приходить будут, и отдавать лист персон) в четвертом удаление персоны
-    // из списка по данным пришедшим из батон листенера
+
+    String getStrFromPersons(List<Person> persons);
+
+    List<Person> getPersonsFromString(String strPersons);
+
+    default List<Person> updateDataInPerson(long id, String [] updatingTypeValue, String[] newValue) {
+        BinaryProcessor.updating(id, updatingTypeValue, newValue);
+        return personList;
+    }
+
+    default List<Person> removePersonsFromList(long id) {
+        personList.removeIf(item -> item.getId() == id);
+        return personList;
+    }
 }
