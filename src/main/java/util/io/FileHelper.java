@@ -1,6 +1,10 @@
 package util.io;
 
+import blogic.model.Person;
+
 import java.io.*;
+import java.util.Iterator;
+import java.util.List;
 
 public class FileHelper {
     public boolean fileExists(String filename) {
@@ -11,6 +15,17 @@ public class FileHelper {
     public boolean isFileEmpty(String filename) {
         File file = new File(filename);
         return file.length() == 0;
+    }
+
+    public boolean isIdLegal(List<Person> arrayList, Person person) {
+        Iterator<Person> iterator = arrayList.iterator();
+        while (iterator.hasNext()) {
+            Person iterPerson = iterator.next();
+            if (iterPerson.getId() == person.getId()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void writeToFile(String input, String filename) {
