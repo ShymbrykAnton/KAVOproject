@@ -1,6 +1,8 @@
 package gui.view;
 
+import blogic.filetype.executor.Executable;
 import blogic.model.Person;
+import gui.buttonListeners.GetName;
 import util.io.FileHelper;
 
 import javax.swing.*;
@@ -8,26 +10,31 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
-import static gui.buttonListeners.ChooseDataSourceButtonListener.executable;
 import static util.Constants.View.*;
-import static util.Constants.Config.*;
 
 
 public class Table {
     private final FileHelper fileHelper = new FileHelper();
+    private final GetName getName;
     private final Frame frame;
-    static JScrollPane scrollPane;
+    private JScrollPane scrollPane;
+
 
     public Table(Frame frame) {
         this.frame = frame;
+        getName = new GetName();
     }
 
-    public void drawTable() {
-        if (!fileHelper.fileExists()) {
+    public void drawTable(String fileName, Executable executable) {
+
+        List<Person> personList;
+
+        if (!fileHelper.fileExists(fileName)) {
             personList = new ArrayList<>();
         } else {
-            personList = executable.read(filename);
+            personList = executable.read(fileName);
         }
 
         DefaultTableModel defaultTableModel = new DefaultTableModel(new Object[][]{},
@@ -44,9 +51,9 @@ public class Table {
         frame.add(scrollPane);
     }
 
-    public void redrawTable() {
+    public void redrawTable(String fileName, Executable executable) {
         frame.remove(scrollPane);
-        drawTable();
+        drawTable(fileName,executable);
         frame.add(scrollPane);
     }
 }

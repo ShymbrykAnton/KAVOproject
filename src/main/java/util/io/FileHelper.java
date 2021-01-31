@@ -2,20 +2,18 @@ package util.io;
 
 import java.io.*;
 
-import static util.Constants.Config.*;
-
 public class FileHelper {
-    public boolean fileExists() {
+    public boolean fileExists(String filename) {
         File tempFile = new File(filename);
         return tempFile.exists();
     }
 
-    public boolean isFileEmpty() {
+    public boolean isFileEmpty(String filename) {
         File file = new File(filename);
         return file.length() == 0;
     }
 
-    public void writeToFile(String input) {
+    public void writeToFile(String input, String filename) {
         try (FileWriter fileWriter = new FileWriter(filename)) {
 
             fileWriter.write(input);
@@ -26,7 +24,7 @@ public class FileHelper {
         }
     }
 
-    public String getFile()  {
+    public String getFile(String filename)  {
         StringBuilder resultStringBuilder = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;

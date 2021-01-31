@@ -19,7 +19,7 @@ public class Constants {
         public final static String CLEAR_ALL = "Clear all";
         public final static String EXIT = "Exit    <3";
 
-        public final static String BINARY = "Binary";
+        public final static String BINARY = "Bin";
         public final static String JSON = "Json";
         public final static String CSV = "Csv";
         public final static String XML = "Xml";
@@ -62,7 +62,5 @@ public class Constants {
     }
 
     public static class Config {
-        public static String filename = "";
-        public static List<Person> personList;
     }
 }

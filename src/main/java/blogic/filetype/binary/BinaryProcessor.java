@@ -46,11 +46,11 @@ public class BinaryProcessor implements Executable {
     }
 
     @Override
-    public void update(long id, String [] updatingTypeValue, String[] newValue) {
-        updating(id, updatingTypeValue, newValue);
+    public void update(long id, String[] updatingTypeValue, String[] newValue, List<Person> personList) {
+        updating(id, updatingTypeValue, newValue, personList);
     }
 
-    public static void updating(long id, String [] updatingTypeValue, String[] newValue) {
+    public static void updating(long id, String[] updatingTypeValue, String[] newValue, List<Person> personList) {
         Iterator<Person> iterator = personList.iterator();
         Person newPerson = new Person();
         int personIndex = 0;
@@ -90,7 +90,7 @@ public class BinaryProcessor implements Executable {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id, List<Person> personList) {
         personList.removeIf(item -> item.getId() == id);
     }
 }

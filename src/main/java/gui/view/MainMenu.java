@@ -1,13 +1,10 @@
 package gui.view;
 
-import blogic.model.Person;
 import gui.buttonListeners.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import static util.Constants.View.*;
 import static util.Constants.DataSource.*;
@@ -17,17 +14,17 @@ import static util.Constants.Messages.*;
 public class MainMenu extends Component {
     private final JFrame frame;
     private final MenuBar mb;
-    private final List<Person> person = new ArrayList<>();
     private final JLabel tableLabel, controlPanelLabel, idLabel, fNameLabel, lNameLabel, ageLabel, cityLabel;
     private final JTextField idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField;
     private final JButton buttonCreate, buttonUpdate, buttonDelete, buttonClearAll, buttonExit;
+    private final GetName getName = new GetName();
+
     public static Table table;
 
     public MainMenu() {
         frame = new JFrame(PROGRAM_NAME);
         table = new Table(frame);
         mb = new MenuBar();
-//        frame.setJMenuBar(new JMenuBar());
 
         tableLabel = new JLabel(FILE_CONTENTS);
         tableLabel.setBounds(200, 50, 100, 30);
@@ -117,8 +114,11 @@ public class MainMenu extends Component {
         dbsFiles.add(yaml);
 
         ActionListener chooseDataSource = new ChooseDataSourceButtonListener(mb);
+
         dbsFiles.addActionListener(chooseDataSource);
-        table.drawTable();
+
+        table.drawTable(getName.getFileName(),getName.getExecutable());
+
         frame.add(tableLabel);
         frame.add(controlPanelLabel);
         frame.add(idLabel);

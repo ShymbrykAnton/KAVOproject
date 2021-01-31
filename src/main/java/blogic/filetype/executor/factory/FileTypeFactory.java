@@ -7,7 +7,6 @@ import blogic.filetype.string.fileTypeConverter.impl.JsonConverter;
 import blogic.filetype.string.fileTypeConverter.impl.XmlConverter;
 import blogic.filetype.string.fileTypeConverter.impl.YamlConverter;
 
-import static gui.buttonListeners.ChooseDataSourceButtonListener.*;
 import static util.Constants.DataSource.*;
 
 public class FileTypeFactory {
@@ -17,7 +16,7 @@ public class FileTypeFactory {
     private final Executable ymlExecutable = new StringProcessor(new YamlConverter());
     private final Executable csvExecutable = new StringProcessor(new CsvConverter());
 
-    public Executable getInstance() {
+    public Executable getInstance(String format) {
         Executable instance;
         switch (format) {
             case YAML_TYPE:
