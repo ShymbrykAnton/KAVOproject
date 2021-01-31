@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static gui.view.MainMenu.table;
+
 public class MySqlProcessor implements Executable {
     private final MySQL mySQL = new MySQL();
 
@@ -23,16 +25,16 @@ public class MySqlProcessor implements Executable {
     @Override
     public List<Person> read(String fileName) {
         List<Person> personList = new ArrayList<>();
-        return  mySQL.readTable(personList);
+        return mySQL.readTable(personList);
     }
 
     @Override
     public void update(long id, String[] newValue, List<Person> personList) {
-
+        mySQL.update(id, newValue);
     }
 
     @Override
     public void delete(long id, List<Person> personList) {
-
+        mySQL.delete(id);
     }
 }

@@ -33,9 +33,10 @@ public class ChooseDataSourceButtonListener implements ActionListener {
         }
         filename = String.format(FILE_FORMAT, input, format);
         yourFileName.setLabel(String.format(YOUR_FILE, filename));
+
         menuBar.add(yourFileName);
+
         Executable executable = fileTypeFactory.getInstance(format);
         table.redrawTable(filename, executable);
     }
-
 }

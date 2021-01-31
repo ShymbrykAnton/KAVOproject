@@ -42,7 +42,7 @@ public class UpdateRecordButtonListener implements ActionListener {
         String[] newValue = {id, fName, lName, age, city};
         personList = executable.read(filename);
         executable.update(idNum, newValue, personList);
-        executable.create(filename, personList);
+//        executable.create(filename, personList);
         table.redrawTable(filename,executable);
 
         idTextField.setText("");

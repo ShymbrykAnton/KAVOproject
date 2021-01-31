@@ -25,7 +25,7 @@ public class DeleteRecordButtonListener implements ActionListener {
         List<Person> personList = executable.read(filename);
         long id = Long.parseLong(idTextField.getText());
         executable.delete(id, personList);
-        executable.create(filename, personList);
+//        executable.create(filename, personList);
         table.redrawTable(filename,executable);
         idTextField.setText("");
     }

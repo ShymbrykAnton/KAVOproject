@@ -36,7 +36,7 @@ public class FileTypeFactory {
             case BINARY_TYPE:
                 instance = binaryExecutable;
                 break;
-            case MY_SQL:
+            case "mysql":
                 instance = mySqlExecutable;
                 break;
             default:
