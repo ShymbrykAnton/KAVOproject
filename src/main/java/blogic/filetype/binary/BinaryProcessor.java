@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import static util.Constants.View.*;
-import static util.Constants.Config.*;
 
 
 public class BinaryProcessor implements Executable {
@@ -46,51 +45,58 @@ public class BinaryProcessor implements Executable {
     }
 
     @Override
-    public void update(long id, String[] updatingTypeValue, String[] newValue, List<Person> personList) {
-        updating(id, updatingTypeValue, newValue, personList);
+    public void update(long id, String[] newValue, List<Person> personList) {
+        updating(id, newValue, personList);
     }
 
-    public static void updating(long id, String[] updatingTypeValue, String[] newValue, List<Person> personList) {
+    public static void updating(long id, String[] newValue, List<Person> personList) {
         Iterator<Person> iterator = personList.iterator();
-        Person newPerson = new Person();
         int personIndex = 0;
+        Person person = new Person();
+        Person item;
         while (iterator.hasNext()) {
-            Person item = iterator.next();
+            item = iterator.next();
             if (item.getId() == id) {
-                newPerson = item;
-                personIndex = personList.indexOf(newPerson);
-                for (int count = 0; count < 5; count++) {
-                    if (!newValue[count].equals("")) {
-                        switch (updatingTypeValue[count]) {
-                            case ID:
-                                newPerson.setId(Long.parseLong(newValue[count]));
-                                break;
-                            case FIRST_NAME:
-                                newPerson.setFName(newValue[count]);
-                                break;
-                            case LAST_NAME:
-                                newPerson.setLName(newValue[count]);
-                                break;
-                            case AGE:
-                                newPerson.setAge(Integer.parseInt(newValue[count]));
-                                break;
-                            case CITY:
-                                newPerson.setCity(newValue[count]);
-                                break;
-                            default:
-                                throw new IllegalArgumentException();
-                        }
-                    }
+                personIndex = personList.indexOf(item);
+                person = refactorPerson(item, newValue);
+                break;
+            }
+        }
+        if (!person.equals(new Person())) {
+            personList.set(personIndex, person);
+        }
+    }
+
+    private static Person refactorPerson(Person newPerson, String[] newValue) {
+        String[] updatingTypeValue = new String[]{"Id", "Fname", "Lname", "Age", "City"};
+        for (int count = 0; count < 5; count++) {
+            if (!newValue[count].equals("")) {
+                switch (updatingTypeValue[count]) {
+                    case ID:
+                        newPerson.setId(Long.parseLong(newValue[count]));
+                        break;
+                    case FIRST_NAME:
+                        newPerson.setFName(newValue[count]);
+                        break;
+                    case LAST_NAME:
+                        newPerson.setLName(newValue[count]);
+                        break;
+                    case AGE:
+                        newPerson.setAge(Integer.parseInt(newValue[count]));
+                        break;
+                    case CITY:
+                        newPerson.setCity(newValue[count]);
+                        break;
+                    default:
+                        throw new IllegalArgumentException();
                 }
             }
         }
-        if (!newPerson.equals(new Person())) {
-            personList.set(personIndex, newPerson);
-        }
+        return newPerson;
     }
 
     @Override
     public void delete(long id, List<Person> personList) {
-        personList.removeIf(item -> item.getId() == id);
+        personList.removeIf(person -> person.getId() == id);
     }
 }

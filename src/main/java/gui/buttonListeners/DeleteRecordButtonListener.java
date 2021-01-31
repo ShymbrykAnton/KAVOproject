@@ -13,7 +13,6 @@ import static gui.view.MainMenu.table;
 
 public class DeleteRecordButtonListener implements ActionListener {
     private final JTextField idTextField;
-    private final GetName getName = new GetName();
 
     public DeleteRecordButtonListener(JTextField idTextField) {
         this.idTextField = idTextField;
@@ -21,8 +20,8 @@ public class DeleteRecordButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String filename = getName.getFileName();
-        Executable executable = getName.getExecutable();
+        String filename = table.getFilename();
+        Executable executable = table.getExecutable();
         List<Person> personList = executable.read(filename);
         long id = Long.parseLong(idTextField.getText());
         executable.delete(id, personList);

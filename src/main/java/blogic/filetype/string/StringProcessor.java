@@ -27,8 +27,8 @@ public class StringProcessor implements Executable {
     }
 
     @Override
-    public void update(long id, String[] updatingTypeValue, String[] newValue, List<Person> personList) {
-        personList = converter.updateDataInPerson(id, updatingTypeValue, newValue, personList);
+    public void update(long id,  String[] newValue, List<Person> personList) {
+        personList = converter.updateDataInPerson(id, newValue, personList);
     }
 
     @Override

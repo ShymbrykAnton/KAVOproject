@@ -1,5 +1,6 @@
 package gui.view;
 
+import blogic.filetype.binary.BinaryProcessor;
 import gui.buttonListeners.*;
 
 import javax.swing.*;
@@ -17,7 +18,6 @@ public class MainMenu extends Component {
     private final JLabel tableLabel, controlPanelLabel, idLabel, fNameLabel, lNameLabel, ageLabel, cityLabel;
     private final JTextField idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField;
     private final JButton buttonCreate, buttonUpdate, buttonDelete, buttonClearAll, buttonExit;
-    private final GetName getName = new GetName();
 
     public static Table table;
 
@@ -117,7 +117,7 @@ public class MainMenu extends Component {
 
         dbsFiles.addActionListener(chooseDataSource);
 
-        table.drawTable(getName.getFileName(),getName.getExecutable());
+        table.drawTable("",new BinaryProcessor());
 
         frame.add(tableLabel);
         frame.add(controlPanelLabel);

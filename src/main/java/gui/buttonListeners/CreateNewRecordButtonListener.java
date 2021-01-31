@@ -19,7 +19,6 @@ public class CreateNewRecordButtonListener implements ActionListener {
     private final JTextField lNameTextField;
     private final JTextField ageTextField;
     private final JTextField cityTextField;
-    private final GetName getName = new GetName();
 
 
 
@@ -37,8 +36,8 @@ public class CreateNewRecordButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String filename = getName.getFileName();
-        Executable executable = getName.getExecutable();
+        String filename = table.getFilename();
+        Executable executable = table.getExecutable();
         List<Person> personList;
         long id = Long.parseLong(idTextField.getText());
         String firstName = fNameTextField.getText();

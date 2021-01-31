@@ -1,6 +1,7 @@
 package gui.buttonListeners;
 
 import blogic.filetype.executor.Executable;
+import blogic.filetype.executor.factory.FileTypeFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,10 +14,9 @@ import static util.Constants.Messages.*;
 
 
 public class ChooseDataSourceButtonListener implements ActionListener {
-    private GetName getName = new GetName();
-    private MenuBar menuBar;
+    private final MenuBar menuBar;
     private final Menu yourFileName = new Menu();
-
+    private final FileTypeFactory fileTypeFactory = new FileTypeFactory();
 
     public ChooseDataSourceButtonListener(MenuBar menuBar) {
         this.menuBar = menuBar;
@@ -24,24 +24,18 @@ public class ChooseDataSourceButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String format;
         String filename = "";
-
-        String dataSource = e.getActionCommand();
-
-        format = dataSource.toLowerCase(Locale.ROOT);
+        String format = e.getActionCommand().toLowerCase(Locale.ROOT);
         String input = JOptionPane.showInputDialog(new JLabel(), ENTER_FILENAME,
                 CHOOSE_FILENAME, JOptionPane.INFORMATION_MESSAGE);
         if (input == null || input.equals("")) {
             return;
         }
-        filename = getName.constructFileName(input, format);
-        System.out.println(filename);
+        filename = String.format(FILE_FORMAT, input, format);
         yourFileName.setLabel(String.format(YOUR_FILE, filename));
         menuBar.add(yourFileName);
-        System.out.println(yourFileName.getLabel());
-        Executable executable = getName.constructExecutable(format);
-        table.drawTable(filename, executable);
+        Executable executable = fileTypeFactory.getInstance(format);
+        table.redrawTable(filename, executable);
     }
 
 }

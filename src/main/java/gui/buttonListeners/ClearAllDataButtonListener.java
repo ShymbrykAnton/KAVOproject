@@ -2,6 +2,7 @@ package gui.buttonListeners;
 
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
+import gui.view.Table;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,12 +15,11 @@ import static util.Constants.Messages.*;
 
 
 public class ClearAllDataButtonListener implements ActionListener {
-    private final GetName getName = new GetName();
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String filename = getName.getFileName();
-        Executable executable = getName.getExecutable();
+        String filename = table.getFilename();
+        Executable executable = table.getExecutable();
         List<Person> personList;
         JLabel confirmLabel = new JLabel(CLEAR_FILE);
         int option = JOptionPane.showConfirmDialog(confirmLabel,

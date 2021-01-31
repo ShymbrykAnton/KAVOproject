@@ -10,8 +10,8 @@ public interface Executable {
 
     List<Person> read(String fileName);
 
-    void update(long id, String [] updatingTypeValue, String[] newValue,List<Person> personList);
+    void update(long id, String[] newValue, List<Person> personList);
     //todo update default + разделить его на два метода
 
-    void delete(long id,List<Person> personList);
+    void delete(long id, List<Person> personList);
 }

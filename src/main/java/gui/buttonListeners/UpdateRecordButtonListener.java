@@ -17,7 +17,6 @@ public class UpdateRecordButtonListener implements ActionListener {
     private final JTextField lNameTextField;
     private final JTextField ageTextField;
     private final JTextField cityTextField;
-    private final GetName getName = new GetName();
 
     public UpdateRecordButtonListener(JTextField idTextField, JTextField fNameTextField,
                                       JTextField lNameTextField, JTextField ageTextField,
@@ -31,8 +30,8 @@ public class UpdateRecordButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String filename = getName.getFileName();
-        Executable executable = getName.getExecutable();
+        String filename = table.getFilename();
+        Executable executable = table.getExecutable();
         List<Person> personList;
         String id = idTextField.getText();
         long idNum = Long.parseLong(id);
@@ -40,26 +39,9 @@ public class UpdateRecordButtonListener implements ActionListener {
         String lName = lNameTextField.getText();
         String age = ageTextField.getText();
         String city = cityTextField.getText();
-        // todo перенос массива типов полей в метод апдейт
-        String[] updatingTypeValue = new String[5];
-        if (!id.equals("")) {
-            updatingTypeValue[0] = ID;
-        }
-        if (!fName.equals("")) {
-            updatingTypeValue[1] = FIRST_NAME;
-        }
-        if (!lName.equals("")) {
-            updatingTypeValue[2] = LAST_NAME;
-        }
-        if (!age.equals("")) {
-            updatingTypeValue[3] = AGE;
-        }
-        if (!city.equals("")) {
-            updatingTypeValue[4] = CITY;
-        }
         String[] newValue = {id, fName, lName, age, city};
         personList = executable.read(filename);
-        executable.update(idNum, updatingTypeValue, newValue, personList);
+        executable.update(idNum, newValue, personList);
         executable.create(filename, personList);
         table.redrawTable(filename,executable);
 

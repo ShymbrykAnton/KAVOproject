@@ -2,7 +2,6 @@ package gui.view;
 
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
-import gui.buttonListeners.GetName;
 import util.io.FileHelper;
 
 import javax.swing.*;
@@ -17,20 +16,29 @@ import static util.Constants.View.*;
 
 public class Table {
     private final FileHelper fileHelper = new FileHelper();
-    private final GetName getName;
     private final Frame frame;
     private JScrollPane scrollPane;
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public Executable getExecutable() {
+        return executable;
+    }
+
+    private String filename;
+    private Executable executable;
 
 
     public Table(Frame frame) {
         this.frame = frame;
-        getName = new GetName();
     }
 
     public void drawTable(String fileName, Executable executable) {
-
+        this.filename = fileName;
+        this.executable = executable;
         List<Person> personList;
-
         if (!fileHelper.fileExists(fileName)) {
             personList = new ArrayList<>();
         } else {
