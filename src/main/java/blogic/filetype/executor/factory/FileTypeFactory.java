@@ -1,4 +1,5 @@
 package blogic.filetype.executor.factory;
+
 import blogic.filetype.binary.BinaryProcessor;
 import blogic.db.MySqlProcessor;
 import blogic.filetype.executor.Executable;

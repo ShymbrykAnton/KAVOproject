@@ -9,13 +9,13 @@ public class Person implements Serializable {
     private long id;
     private String fName;
     private String lName;
-    private int age;
+    private byte age;
     private String city;
 
     public Person() {
     }
 
-    public Person(long id, String fName, String lName, int age, String city) {
+    public Person(long id, String fName, String lName, byte age, String city) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
@@ -47,11 +47,11 @@ public class Person implements Serializable {
         this.lName = lName;
     }
 
-    public int getAge() {
+    public byte getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(byte age) {
         this.age = age;
     }
 

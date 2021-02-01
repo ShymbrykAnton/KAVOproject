@@ -40,6 +40,8 @@ public class Constants {
         public final static String CLEAR_WARNING = "Do you really want to delete all data in %s.";
         public final static String EXIT_CONFORMATION = "Are you sure you want to close the application?";
         public final static String LABEL_FORMAT = "%s: ";
+        public static final String ILLEGAL_PERSON_ID = "This id is busy.";
+        public static final String ILLEGAL_AGE = "Incorrect age, max age = 100.";
     }
 
     public static class Errors {
