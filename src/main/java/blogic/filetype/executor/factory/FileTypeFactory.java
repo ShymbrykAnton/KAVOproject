@@ -1,16 +1,15 @@
 package blogic.filetype.executor.factory;
 
-import blogic.db.PostgreSQLProcessor;
 import blogic.filetype.binary.BinaryProcessor;
-import blogic.db.MySqlProcessor;
 import blogic.filetype.executor.Executable;
 import blogic.filetype.string.StringProcessor;
 import blogic.filetype.string.fileTypeConverter.impl.CsvConverter;
 import blogic.filetype.string.fileTypeConverter.impl.JsonConverter;
 import blogic.filetype.string.fileTypeConverter.impl.XmlConverter;
 import blogic.filetype.string.fileTypeConverter.impl.YamlConverter;
-
-import java.util.Locale;
+import dao.DbProcessor;
+import dao.impl.sql.MySQL;
+import dao.impl.sql.PostgreSQL;
 
 import static util.Constants.DataSource.*;
 
@@ -20,8 +19,8 @@ public class FileTypeFactory {
     private final Executable xmlExecutable = new StringProcessor(new XmlConverter());
     private final Executable ymlExecutable = new StringProcessor(new YamlConverter());
     private final Executable csvExecutable = new StringProcessor(new CsvConverter());
-    private final Executable mySqlExecutable = new MySqlProcessor();
-    private final Executable postgresSQL = new PostgreSQLProcessor();
+    private final Executable mySqlExecutable = new DbProcessor(new MySQL());
+    private final Executable postgresSQL = new DbProcessor(new PostgreSQL());
 
     public Executable getInstance(String format) {
         Executable instance;
@@ -44,7 +43,7 @@ public class FileTypeFactory {
             case MY_SQL:
                 instance = mySqlExecutable;
                 break;
-            case "postgresql":
+            case POSTGRE_SQL:
                 instance = postgresSQL;
                 break;
             default:

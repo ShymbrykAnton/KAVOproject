@@ -1,38 +1,39 @@
-package blogic.db;
+package dao;
 
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
-import databases.sqldb.mysql.MySQL;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class MySqlProcessor implements Executable {
-    private final MySQL mySQL = new MySQL();
+public class DbProcessor implements Executable {
+    private final IDatabaseController iDatabaseController;
+
+    public DbProcessor(IDatabaseController iDatabaseController) {
+        this.iDatabaseController = iDatabaseController;
+    }
 
     @Override
     public void create(String fileName, List<Person> persons) {
         Iterator<Person> iterator = persons.iterator();
         while (iterator.hasNext()) {
             Person iterPerson = iterator.next();
-            mySQL.createPerson(iterPerson);
+            iDatabaseController.addToDatabase(iterPerson);
         }
     }
 
     @Override
     public List<Person> read(String fileName) {
-        List<Person> personList = new ArrayList<>();
-        return mySQL.readTable(personList);
+        return iDatabaseController.readFromDatabase();
     }
 
     @Override
     public void update(long id, String[] newValue, List<Person> personList) {
-        mySQL.update(id, newValue);
+        iDatabaseController.updateDataInPerson(id, newValue);
     }
 
     @Override
     public void delete(long id, List<Person> personList) {
-        mySQL.delete(id);
+        iDatabaseController.removePersonsFromList(id);
     }
 }

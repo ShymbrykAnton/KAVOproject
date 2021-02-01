@@ -11,6 +11,7 @@ import java.util.Locale;
 
 import static gui.view.MainMenu.table;
 import static util.Constants.Messages.*;
+import static util.Constants.View.*;
 
 
 public class ChooseDataSourceButtonListener implements ActionListener {
@@ -24,18 +25,22 @@ public class ChooseDataSourceButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String filename = "";
-        String format = e.getActionCommand().toLowerCase(Locale.ROOT);
-        String input = JOptionPane.showInputDialog(new JLabel(), ENTER_FILENAME,
-                CHOOSE_FILENAME, JOptionPane.INFORMATION_MESSAGE);
-        if (input == null || input.equals("")) {
-            return;
+        String filename;
+        String format = e.getActionCommand();
+        if (format.equals(JSON) || format.equals(CSV) || format.equals(YAML) || format.equals(BINARY) || format.equals(XML)) {
+           String input = JOptionPane.showInputDialog(new JLabel(), ENTER_FILENAME,
+                    CHOOSE_FILENAME, JOptionPane.INFORMATION_MESSAGE);
+            if (input == null || input.equals("")) {
+                return;
+            }
+            format = format.toLowerCase(Locale.ROOT);
+            filename = String.format(FILE_FORMAT, input, format);
+            yourFileName.setLabel(String.format(YOUR_FILE, filename));
+        } else {
+            filename = format;
+            yourFileName.setLabel(String.format("Your database: %s", filename));
         }
-        filename = String.format(FILE_FORMAT, input, format);
-        yourFileName.setLabel(String.format(YOUR_FILE, filename));
-
         menuBar.add(yourFileName);
-
         Executable executable = fileTypeFactory.getInstance(format);
         table.redrawTable(filename, executable);
     }
