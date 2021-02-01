@@ -1,56 +1,40 @@
-package databases.sqldb.mysql;
+package dao.impl.sql;
 
 import blogic.model.Person;
+import dao.IDatabaseController;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class MySQL {
+public abstract class SQLBase implements IDatabaseController {
 
-    private Connection connection;
+    public abstract Connection getConnection();
 
-    private Connection getConnection() {
 
-        String connectionUrl = "jdbc:mysql://localhost:3306/public";
-        String loginDb = "root";
-        String password = "1234";
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectionUrl, loginDb, password);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
-
-    public void createPerson(Person person) {
+    public void addToDatabase(Person person) {
         String insert = "INSERT INTO persons (id,first_name,last_name,age,city) VALUES (?,?,?,?,?)";
-        try {
-            PreparedStatement ps = getConnection().prepareStatement(insert);
-            ps.setString(1, String.valueOf(person.getId()));
+        try (PreparedStatement ps = getConnection().prepareStatement(insert)){
+            ps.setLong(1, person.getId());
             ps.setString(2, person.getFName());
             ps.setString(3, person.getLName());
-            ps.setString(4, String.valueOf(person.getAge()));
+            ps.setByte(4, person.getAge());
             ps.setString(5, person.getCity());
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
-
-    public List<Person> readTable(List<Person> personList) {
+    public List<Person> readFromDatabase() {
         String select = "SELECT * FROM persons";
+        List<Person> personList = new ArrayList<>();
         try {
             Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(select);
 
             while (resultSet.next()) {
                 Person person = new Person();
-                person.setId(resultSet.getInt(1));
+                person.setId(resultSet.getLong(1));
                 person.setFName(resultSet.getString(2));
                 person.setLName(resultSet.getString(3));
                 person.setAge(resultSet.getByte(4));
@@ -64,7 +48,7 @@ public class MySQL {
         return personList;
     }
 
-    public void update(long id, String[] newValue) {
+    public void updateDataInPerson(long id, String[] newValue) {
         String update = "";
         if (!newValue[1].equals("")) {
             update += "first_name=" + "'" + newValue[1] + "',";
@@ -86,7 +70,8 @@ public class MySQL {
             throwables.printStackTrace();
         }
     }
-    public void delete (long id) {
+
+    public void removePersonsFromList (long id) {
         String delete = "DELETE FROM persons WHERE id =" + id;
         try {
             PreparedStatement ps = getConnection().prepareStatement(delete);
@@ -95,4 +80,7 @@ public class MySQL {
             throwables.printStackTrace();
         }
     }
+
+
 }
+

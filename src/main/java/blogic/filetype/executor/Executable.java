@@ -10,7 +10,7 @@ public interface Executable {
 
     List<Person> read(String fileName);
 
-    void update(long id, String[] newValue, List<Person> personList);
+    void update(long id, String[] newValue, List<Person> personList, String filename);
 
-    void delete(long id, List<Person> personList);
+    void delete(long id, List<Person> personList, String filename);
 }

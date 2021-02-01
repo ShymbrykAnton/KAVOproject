@@ -49,7 +49,7 @@ public class Constants {
     }
 
     public static class DataSource {
-        public final static String MY_SQL = "mysql";
+        public final static String MY_SQL = "MySQL";
         public final static String POSTGRE_SQL = "PostgreSQL";
         public final static String H2 = "H2";
         public final static String MONGO_DB = "MongoDB";
