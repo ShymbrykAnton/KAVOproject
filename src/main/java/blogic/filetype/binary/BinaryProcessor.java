@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static gui.view.MainMenu.table;
 import static util.Constants.View.*;
 
 
@@ -47,9 +48,10 @@ public class BinaryProcessor implements Executable {
     @Override
     public void update(long id, String[] newValue, List<Person> personList) {
         updating(id, newValue, personList);
+        create(table.getFilename(),personList);
     }
 
-    public static void updating(long id, String[] newValue, List<Person> personList) {
+    private void updating(long id, String[] newValue, List<Person> personList) {
         Iterator<Person> iterator = personList.iterator();
         int personIndex = 0;
         Person person = new Person();
@@ -67,7 +69,7 @@ public class BinaryProcessor implements Executable {
         }
     }
 
-    private static Person refactorPerson(Person newPerson, String[] newValue) {
+    private Person refactorPerson(Person newPerson, String[] newValue) {
         String[] updatingTypeValue = new String[]{"Id", "Fname", "Lname", "Age", "City"};
         for (int count = 0; count < 5; count++) {
             if (!newValue[count].equals("")) {
@@ -98,5 +100,6 @@ public class BinaryProcessor implements Executable {
     @Override
     public void delete(long id, List<Person> personList) {
         personList.removeIf(person -> person.getId() == id);
+        create(table.getFilename(),personList);
     }
 }

@@ -7,13 +7,14 @@ import java.util.List;
 
 
 public interface IFileTypeConverter {
+    BinaryProcessor binaryProcessor = new BinaryProcessor();
 
     String getStrFromPersons(List<Person> persons);
 
     List<Person> getPersonsFromString(String strPersons);
 
     default List<Person> updateDataInPerson(long id, String[] newValue, List<Person> personList) {
-        BinaryProcessor.updating(id, newValue, personList);
+        binaryProcessor.update(id, newValue, personList);
         return personList;
     }
 

@@ -1,6 +1,6 @@
 package blogic.filetype.executor.factory;
 import blogic.filetype.binary.BinaryProcessor;
-import blogic.filetype.db.MySqlProcessor;
+import blogic.db.MySqlProcessor;
 import blogic.filetype.executor.Executable;
 import blogic.filetype.string.StringProcessor;
 import blogic.filetype.string.fileTypeConverter.impl.CsvConverter;

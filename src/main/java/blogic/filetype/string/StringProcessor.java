@@ -7,6 +7,8 @@ import blogic.model.Person;
 
 import java.util.List;
 
+import static gui.view.MainMenu.table;
+
 public class StringProcessor implements Executable {
     private final FileHelper fileHelper = new FileHelper();
     private final IFileTypeConverter converter;
@@ -29,10 +31,12 @@ public class StringProcessor implements Executable {
     @Override
     public void update(long id,  String[] newValue, List<Person> personList) {
         personList = converter.updateDataInPerson(id, newValue, personList);
+        create(table.getFilename(),personList);
     }
 
     @Override
     public void delete(long id, List<Person> personList) {
         personList = converter.removePersonsFromList(id, personList);
+        create(table.getFilename(),personList);
     }
 }

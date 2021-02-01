@@ -1,4 +1,4 @@
-package blogic.filetype.db;
+package blogic.db;
 
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
@@ -7,8 +7,6 @@ import databases.sqldb.mysql.MySQL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import static gui.view.MainMenu.table;
 
 public class MySqlProcessor implements Executable {
     private final MySQL mySQL = new MySQL();
