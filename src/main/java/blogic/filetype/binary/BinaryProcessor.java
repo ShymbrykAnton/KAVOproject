@@ -84,7 +84,7 @@ public class BinaryProcessor implements Executable {
                         newPerson.setLName(newValue[count]);
                         break;
                     case AGE:
-                        newPerson.setAge(Integer.parseInt(newValue[count]));
+                        newPerson.setAge(Byte.parseByte(newValue[count]));
                         break;
                     case CITY:
                         newPerson.setCity(newValue[count]);

@@ -6,6 +6,8 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 
+import static util.Constants.Messages.*;
+
 public class FileHelper {
     public boolean fileExists(String filename) {
         File tempFile = new File(filename);
@@ -17,15 +19,27 @@ public class FileHelper {
         return file.length() == 0;
     }
 
-    public boolean isIdLegal(List<Person> arrayList, Person person) {
-        Iterator<Person> iterator = arrayList.iterator();
+    public void ageValidation(int age) {
+        if (age > 120) {
+            throw new IllegalArgumentException(ILLEGAL_AGE);
+        }
+    }
+
+    public void idValidation(List<Person> personList, long id) {
+        if (isIdLegal(personList, id)) {
+            throw new IllegalArgumentException(ILLEGAL_PERSON_ID);
+        }
+    }
+
+    private boolean isIdLegal(List<Person> personList, long id) {
+        Iterator<Person> iterator = personList.iterator();
         while (iterator.hasNext()) {
             Person iterPerson = iterator.next();
-            if (iterPerson.getId() == person.getId()) {
-                return false;
+            if (iterPerson.getId() == id) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public void writeToFile(String input, String filename) {
