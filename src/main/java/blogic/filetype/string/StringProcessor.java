@@ -7,8 +7,7 @@ import blogic.model.Person;
 
 import java.util.List;
 
-
-import static util.Constants.Config.*;
+import static gui.view.MainMenu.table;
 
 public class StringProcessor implements Executable {
     private final FileHelper fileHelper = new FileHelper();
@@ -21,21 +20,23 @@ public class StringProcessor implements Executable {
 
     @Override
     public void create(String fileName, List<Person> persons) {
-        fileHelper.writeToFile(converter.getStrFromPersons(persons));
+        fileHelper.writeToFile(converter.getStrFromPersons(persons), fileName);
     }
 
     @Override
     public List<Person> read(String fileName) {
-        return converter.getPersonsFromString(fileHelper.getFile());
+        return converter.getPersonsFromString(fileHelper.getFile(fileName));
     }
 
     @Override
-    public void update(long id, String[] updatingTypeValue, String[] newValue) {
-        personList = converter.updateDataInPerson(id, updatingTypeValue, newValue);
+    public void update(long id,  String[] newValue, List<Person> personList) {
+        personList = converter.updateDataInPerson(id, newValue, personList);
+        create(table.getFilename(),personList);
     }
 
     @Override
-    public void delete(long id) {
-        personList = converter.removePersonsFromList(id);
+    public void delete(long id, List<Person> personList) {
+        personList = converter.removePersonsFromList(id, personList);
+        create(table.getFilename(),personList);
     }
 }

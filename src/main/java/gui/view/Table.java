@@ -1,5 +1,6 @@
 package gui.view;
 
+import blogic.filetype.executor.Executable;
 import blogic.model.Person;
 import util.io.FileHelper;
 
@@ -8,28 +9,44 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
-import static gui.buttonListeners.ChooseDataSourceButtonListener.executable;
+import static util.Constants.DataSource.MY_SQL;
 import static util.Constants.View.*;
-import static util.Constants.Config.*;
 
 
 public class Table {
     private final FileHelper fileHelper = new FileHelper();
     private final Frame frame;
-    static JScrollPane scrollPane;
+    private JScrollPane scrollPane;
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public Executable getExecutable() {
+        return executable;
+    }
+
+    private String filename;
+    private Executable executable;
+
 
     public Table(Frame frame) {
         this.frame = frame;
     }
 
-    public void drawTable() {
-        if (!fileHelper.fileExists()) {
+    public void drawTable(String fileName, Executable executable) {
+        this.filename = fileName;
+        this.executable = executable;
+        List<Person> personList;
+        if (fileName.substring(fileName.lastIndexOf('.') + 1).equals(MY_SQL)) {
+            personList = executable.read(fileName);
+        } else if (!fileHelper.fileExists(fileName)) {
             personList = new ArrayList<>();
         } else {
-            personList = executable.read(filename);
+            personList = executable.read(fileName);
         }
-
         DefaultTableModel defaultTableModel = new DefaultTableModel(new Object[][]{},
                 new Object[]{ID, FIRST_NAME, LAST_NAME, AGE, CITY});
         for (Person person : personList) {
@@ -44,9 +61,9 @@ public class Table {
         frame.add(scrollPane);
     }
 
-    public void redrawTable() {
+    public void redrawTable(String fileName, Executable executable) {
         frame.remove(scrollPane);
-        drawTable();
+        drawTable(fileName, executable);
         frame.add(scrollPane);
     }
 }

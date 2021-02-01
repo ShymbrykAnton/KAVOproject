@@ -1,6 +1,7 @@
 package blogic.filetype.executor.factory;
 
 import blogic.filetype.binary.BinaryProcessor;
+import blogic.db.MySqlProcessor;
 import blogic.filetype.executor.Executable;
 import blogic.filetype.string.StringProcessor;
 import blogic.filetype.string.fileTypeConverter.impl.CsvConverter;
@@ -8,7 +9,6 @@ import blogic.filetype.string.fileTypeConverter.impl.JsonConverter;
 import blogic.filetype.string.fileTypeConverter.impl.XmlConverter;
 import blogic.filetype.string.fileTypeConverter.impl.YamlConverter;
 
-import static gui.buttonListeners.ChooseDataSourceButtonListener.*;
 import static util.Constants.DataSource.*;
 
 public class FileTypeFactory {
@@ -17,8 +17,9 @@ public class FileTypeFactory {
     private final Executable xmlExecutable = new StringProcessor(new XmlConverter());
     private final Executable ymlExecutable = new StringProcessor(new YamlConverter());
     private final Executable csvExecutable = new StringProcessor(new CsvConverter());
+    private final Executable mySqlExecutable = new MySqlProcessor();
 
-    public Executable getInstance() {
+    public Executable getInstance(String format) {
         Executable instance;
         switch (format) {
             case YAML_TYPE:
@@ -35,6 +36,9 @@ public class FileTypeFactory {
                 break;
             case BINARY_TYPE:
                 instance = binaryExecutable;
+                break;
+            case "mysql":
+                instance = mySqlExecutable;
                 break;
             default:
                 throw new IllegalArgumentException();
