@@ -2,12 +2,11 @@ package blogic.filetype.string;
 
 import blogic.filetype.executor.Executable;
 import blogic.filetype.string.fileTypeConverter.IFileTypeConverter;
+import gui.buttonListeners.controller.ListenerController;
 import util.io.FileHelper;
 import blogic.model.Person;
 
 import java.util.List;
-
-import static gui.view.MainMenu.table;
 
 public class StringProcessor implements Executable {
     private final FileHelper fileHelper = new FileHelper();
@@ -16,7 +15,6 @@ public class StringProcessor implements Executable {
     public StringProcessor(IFileTypeConverter converter) {
         this.converter = converter;
     }
-
 
     @Override
     public void create(String fileName, List<Person> persons) {
@@ -29,14 +27,14 @@ public class StringProcessor implements Executable {
     }
 
     @Override
-    public void update(long id,  String[] newValue, List<Person> personList) {
+    public void update(long id,  String[] newValue, List<Person> personList, String filename) {
         personList = converter.updateDataInPerson(id, newValue, personList);
-        create(table.getFilename(),personList);
+        create(filename,personList);
     }
 
     @Override
-    public void delete(long id, List<Person> personList) {
+    public void delete(long id, List<Person> personList, String filename) {
         personList = converter.removePersonsFromList(id, personList);
-        create(table.getFilename(),personList);
+        create(filename,personList);
     }
 }

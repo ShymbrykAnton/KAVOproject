@@ -2,19 +2,22 @@ package blogic.filetype.binary;
 
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
+import gui.buttonListeners.controller.ListenerController;
+import util.update.Update;
 
 import java.io.IOException;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import static gui.view.MainMenu.table;
-import static util.Constants.View.*;
 
 
 public class BinaryProcessor implements Executable {
+
+    public BinaryProcessor() {
+    }
+
     @Override
     public void create(String fileName, List<Person> persons) {
         FileOutputStream fos;
@@ -46,60 +49,17 @@ public class BinaryProcessor implements Executable {
     }
 
     @Override
-    public void update(long id, String[] newValue, List<Person> personList) {
-        updating(id, newValue, personList);
-        create(table.getFilename(),personList);
+    public void update(long id, String[] newValue, List<Person> personList, String filename) {
+        Update update = new Update();
+        update.updating(id, newValue, personList);
+        create(filename,personList);
     }
 
-    private void updating(long id, String[] newValue, List<Person> personList) {
-        Iterator<Person> iterator = personList.iterator();
-        int personIndex = 0;
-        Person person = new Person();
-        Person item;
-        while (iterator.hasNext()) {
-            item = iterator.next();
-            if (item.getId() == id) {
-                personIndex = personList.indexOf(item);
-                person = refactorPerson(item, newValue);
-                break;
-            }
-        }
-        if (!person.equals(new Person())) {
-            personList.set(personIndex, person);
-        }
-    }
 
-    private Person refactorPerson(Person newPerson, String[] newValue) {
-        String[] updatingTypeValue = new String[]{"Id", "Fname", "Lname", "Age", "City"};
-        for (int count = 0; count < 5; count++) {
-            if (!newValue[count].equals("")) {
-                switch (updatingTypeValue[count]) {
-                    case ID:
-                        newPerson.setId(Long.parseLong(newValue[count]));
-                        break;
-                    case FIRST_NAME:
-                        newPerson.setFName(newValue[count]);
-                        break;
-                    case LAST_NAME:
-                        newPerson.setLName(newValue[count]);
-                        break;
-                    case AGE:
-                        newPerson.setAge(Byte.parseByte(newValue[count]));
-                        break;
-                    case CITY:
-                        newPerson.setCity(newValue[count]);
-                        break;
-                    default:
-                        throw new IllegalArgumentException();
-                }
-            }
-        }
-        return newPerson;
-    }
 
     @Override
-    public void delete(long id, List<Person> personList) {
+    public void delete(long id, List<Person> personList, String filename) {
         personList.removeIf(person -> person.getId() == id);
-        create(table.getFilename(),personList);
+        create(filename,personList);
     }
 }

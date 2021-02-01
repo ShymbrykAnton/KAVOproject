@@ -28,12 +28,12 @@ public class DbProcessor implements Executable {
     }
 
     @Override
-    public void update(long id, String[] newValue, List<Person> personList) {
+    public void update(long id, String[] newValue, List<Person> personList, String filename) {
         iDatabaseController.updateDataInPerson(id, newValue);
     }
 
     @Override
-    public void delete(long id, List<Person> personList) {
+    public void delete(long id, List<Person> personList, String filename) {
         iDatabaseController.removePersonsFromList(id);
     }
 }

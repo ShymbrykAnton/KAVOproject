@@ -10,10 +10,14 @@ import blogic.filetype.string.fileTypeConverter.impl.YamlConverter;
 import dao.DbProcessor;
 import dao.impl.sql.MySQL;
 import dao.impl.sql.PostgreSQL;
+import gui.buttonListeners.controller.ListenerController;
 
 import static util.Constants.DataSource.*;
 
 public class FileTypeFactory {
+
+    public FileTypeFactory() {
+    }
     private final Executable binaryExecutable = new BinaryProcessor();
     private final Executable jsonExecutable = new StringProcessor(new JsonConverter());
     private final Executable xmlExecutable = new StringProcessor(new XmlConverter());

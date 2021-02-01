@@ -1,7 +1,7 @@
 package gui.view;
 
-import blogic.filetype.binary.BinaryProcessor;
 import gui.buttonListeners.*;
+import gui.buttonListeners.controller.ListenerController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,71 +13,65 @@ import static util.Constants.Messages.*;
 
 
 public class MainMenu extends Component {
-    private final JFrame frame;
-    private final MenuBar mb;
-    private final JLabel tableLabel, controlPanelLabel, idLabel, fNameLabel, lNameLabel, ageLabel, cityLabel;
-    private final JTextField idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField;
-    private final JButton buttonCreate, buttonUpdate, buttonDelete, buttonClearAll, buttonExit;
-
-    public static Table table;
 
     public MainMenu() {
-        frame = new JFrame(PROGRAM_NAME);
-        table = new Table(frame);
-        mb = new MenuBar();
+        JFrame frame = new JFrame(PROGRAM_NAME);
+        ListenerController listenerController = new ListenerController(frame);
+        listenerController.getTable().drawTable(listenerController.getFilename(), listenerController.getExecutable());
+        MenuBar mb = new MenuBar();
 
-        tableLabel = new JLabel(FILE_CONTENTS);
+        JLabel tableLabel = new JLabel(FILE_CONTENTS);
         tableLabel.setBounds(200, 50, 100, 30);
 
-        controlPanelLabel = new JLabel(CONTROL_PANEL);
+        JLabel controlPanelLabel = new JLabel(CONTROL_PANEL);
         controlPanelLabel.setBounds(650, 50, 100, 30);
 
-        idLabel = new JLabel(String.format(LABEL_FORMAT, ID));
+        JLabel idLabel = new JLabel(String.format(LABEL_FORMAT, ID));
         idLabel.setBounds(500, 100, 50, 30);
-        idTextField = new JTextField();
+        JTextField idTextField = new JTextField();
         idTextField.setBounds(550, 100, 300, 30);
 
-        fNameLabel = new JLabel(String.format(LABEL_FORMAT, FIRST_NAME));
+        JLabel fNameLabel = new JLabel(String.format(LABEL_FORMAT, FIRST_NAME));
         fNameLabel.setBounds(500, 130, 50, 30);
-        fNameTextField = new JTextField();
+        JTextField fNameTextField = new JTextField();
         fNameTextField.setBounds(550, 130, 300, 30);
 
-        lNameLabel = new JLabel(String.format(LABEL_FORMAT, LAST_NAME));
+        JLabel lNameLabel = new JLabel(String.format(LABEL_FORMAT, LAST_NAME));
         lNameLabel.setBounds(500, 160, 50, 30);
-        lNameTextField = new JTextField();
+        JTextField lNameTextField = new JTextField();
         lNameTextField.setBounds(550, 160, 300, 30);
 
-        ageLabel = new JLabel(String.format(LABEL_FORMAT, AGE));
+        JLabel ageLabel = new JLabel(String.format(LABEL_FORMAT, AGE));
         ageLabel.setBounds(500, 190, 50, 30);
-        ageTextField = new JTextField();
+        JTextField ageTextField = new JTextField();
         ageTextField.setBounds(550, 190, 300, 30);
 
-        cityLabel = new JLabel(String.format(LABEL_FORMAT, CITY));
+        JLabel cityLabel = new JLabel(String.format(LABEL_FORMAT, CITY));
         cityLabel.setBounds(500, 220, 50, 30);
-        cityTextField = new JTextField();
+        JTextField cityTextField = new JTextField();
         cityTextField.setBounds(550, 220, 300, 30);
 //////////////////////////////Создание кнопок//////////////////////////////////////////////
-        buttonCreate = new JButton(CREATE);//creating instance of JButton
+        JButton buttonCreate = new JButton(CREATE);//creating instance of JButton
         buttonCreate.setBounds(550, 250, 100, 40);
-        ActionListener createActionListener = new CreateNewRecordButtonListener(idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField);
+        ActionListener createActionListener = new CreateNewRecordButtonListener(idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField, listenerController);
         buttonCreate.addActionListener(createActionListener);
 
-        buttonUpdate = new JButton(UPDATE);//creating instance of JButton
+        JButton buttonUpdate = new JButton(UPDATE);//creating instance of JButton
         buttonUpdate.setBounds(650, 250, 100, 40);
-        ActionListener updateActionListener = new UpdateRecordButtonListener(idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField);
+        ActionListener updateActionListener = new UpdateRecordButtonListener(idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField, listenerController);
         buttonUpdate.addActionListener(updateActionListener);
 
-        buttonDelete = new JButton(DELETE);//creating instance of JButton
+        JButton buttonDelete = new JButton(DELETE);//creating instance of JButton
         buttonDelete.setBounds(750, 250, 100, 40);
-        ActionListener deleteActionListener = new DeleteRecordButtonListener(idTextField);
+        ActionListener deleteActionListener = new DeleteRecordButtonListener(idTextField, listenerController);
         buttonDelete.addActionListener(deleteActionListener);
 
-        buttonClearAll = new JButton(CLEAR_ALL);
+        JButton buttonClearAll = new JButton(CLEAR_ALL);
         buttonClearAll.setBounds(50, 450, 100, 50);
-        ActionListener clearAllActionListener = new ClearAllDataButtonListener();
+        ActionListener clearAllActionListener = new ClearAllDataButtonListener(listenerController);
         buttonClearAll.addActionListener(clearAllActionListener);
 
-        buttonExit = new JButton(EXIT);
+        JButton buttonExit = new JButton(EXIT);
         buttonExit.setBounds(725, 450, 100, 50);
         ActionListener exitActionListener = new ExitButtonListener();
         buttonExit.addActionListener(exitActionListener);
@@ -113,11 +107,9 @@ public class MainMenu extends Component {
         MenuItem yaml = new MenuItem(YAML);
         dbsFiles.add(yaml);
 
-        ActionListener chooseDataSource = new ChooseDataSourceButtonListener(mb);
-
+        ActionListener chooseDataSource = new ChooseDataSourceButtonListener(mb, listenerController);
         dbsFiles.addActionListener(chooseDataSource);
 
-        table.drawTable("",new BinaryProcessor());
 
         frame.add(tableLabel);
         frame.add(controlPanelLabel);
@@ -142,6 +134,8 @@ public class MainMenu extends Component {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(900, 600);
         frame.setLocationRelativeTo(null);
+
+
 //        frame.getContentPane().setBackground(Color.WHITE);
 
 //////////////////////////////////Закрытие приложения через "крестик"/////////////////////
@@ -156,6 +150,7 @@ public class MainMenu extends Component {
 ////////////////////////////////////////////////////////////////////////////////////////////
 
     }
+
 
 ////////////////////////////////Метод закрытия приложения////////////////////////////////////
 //    private void Exit() {

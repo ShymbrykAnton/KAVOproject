@@ -1,20 +1,21 @@
 package blogic.filetype.string.fileTypeConverter;
 
-import blogic.filetype.binary.BinaryProcessor;
 import blogic.model.Person;
+import util.update.Update;
 
 import java.util.List;
 
 
 public interface IFileTypeConverter {
-    BinaryProcessor binaryProcessor = new BinaryProcessor();
+
 
     String getStrFromPersons(List<Person> persons);
 
     List<Person> getPersonsFromString(String strPersons);
 
     default List<Person> updateDataInPerson(long id, String[] newValue, List<Person> personList) {
-        binaryProcessor.update(id, newValue, personList);
+        Update update = new Update();
+        update.updating(id, newValue, personList);
         return personList;
     }
 
