@@ -2,6 +2,7 @@ package gui.buttonListeners;
 
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
+import util.io.FileHelper;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,12 +21,13 @@ public class DeleteRecordButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+//        FileHelper fileHelper = new FileHelper();
         String filename = table.getFilename();
         Executable executable = table.getExecutable();
         List<Person> personList = executable.read(filename);
         long id = Long.parseLong(idTextField.getText());
+//        fileHelper.idValidation(personList,id);
         executable.delete(id, personList);
-//        executable.create(filename, personList);
         table.redrawTable(filename,executable);
         idTextField.setText("");
     }

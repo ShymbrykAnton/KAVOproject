@@ -39,13 +39,13 @@ public class CreateNewRecordButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String filename = table.getFilename();
         Executable executable = table.getExecutable();
-        List<Person> personList;
+        List<Person> personList = executable.read(filename);
         long id = Long.parseLong(idTextField.getText());
         fileHelper.idValidation(personList, id);
         String firstName = fNameTextField.getText();
         String lastName = lNameTextField.getText();
         byte age = Byte.parseByte((ageTextField.getText()));
-        fileHelper.ageValidation(age);
+//        fileHelper.ageValidation(age);
         String city = cityTextField.getText();
 
         if (!fileHelper.fileExists(filename)) {

@@ -10,8 +10,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static util.Constants.DataSource.MY_SQL;
+import static util.Constants.DataSource.POSTGRE_SQL;
 import static util.Constants.View.*;
 
 
@@ -40,7 +42,8 @@ public class Table {
         this.filename = fileName;
         this.executable = executable;
         List<Person> personList;
-        if (fileName.substring(fileName.lastIndexOf('.') + 1).equals(MY_SQL)) {
+        String format = fileName.substring(fileName.lastIndexOf('.') + 1);
+        if (format.equals(MY_SQL)||format.equals(POSTGRE_SQL.toLowerCase(Locale.ROOT))) {
             personList = executable.read(fileName);
         } else if (!fileHelper.fileExists(fileName)) {
             personList = new ArrayList<>();
