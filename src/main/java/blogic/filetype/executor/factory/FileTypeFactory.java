@@ -8,6 +8,8 @@ import blogic.filetype.string.fileTypeConverter.impl.JsonConverter;
 import blogic.filetype.string.fileTypeConverter.impl.XmlConverter;
 import blogic.filetype.string.fileTypeConverter.impl.YamlConverter;
 import dao.DbProcessor;
+import dao.impl.nosql.Cassandra;
+import dao.impl.sql.H2;
 import dao.impl.sql.MySQL;
 import dao.impl.sql.PostgreSQL;
 import gui.buttonListeners.controller.ListenerController;
@@ -25,6 +27,9 @@ public class FileTypeFactory {
     private final Executable csvExecutable = new StringProcessor(new CsvConverter());
     private final Executable mySqlExecutable = new DbProcessor(new MySQL());
     private final Executable postgresSQL = new DbProcessor(new PostgreSQL());
+    private final Executable h2 = new DbProcessor(new H2());
+    private final Executable cassandra = new DbProcessor(new Cassandra());
+
 
     public Executable getInstance(String format) {
         Executable instance;
@@ -49,6 +54,12 @@ public class FileTypeFactory {
                 break;
             case POSTGRE_SQL:
                 instance = postgresSQL;
+                break;
+            case H2:
+                instance = h2;
+                break;
+            case CASSANDRA:
+                instance = cassandra;
                 break;
             default:
                 throw new IllegalArgumentException();
