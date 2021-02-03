@@ -30,6 +30,7 @@ public class FileTypeFactory {
     private final Executable h2 = new DbProcessor(new H2());
     private final Executable cassandra = new DbProcessor(new Cassandra());
 
+
     public Executable getInstance(String format) {
         Executable instance;
         switch (format) {

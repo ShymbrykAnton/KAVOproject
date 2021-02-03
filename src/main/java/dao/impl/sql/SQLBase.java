@@ -29,6 +29,7 @@ public abstract class SQLBase implements IDatabaseController {
         String select = "SELECT * FROM persons";
         List<Person> personList = new ArrayList<>();
         try(Statement statement = getConnection().createStatement()) {
+
             ResultSet resultSet = statement.executeQuery(select);
 
             while (resultSet.next()) {
@@ -63,6 +64,7 @@ public abstract class SQLBase implements IDatabaseController {
         }
         String finalUpdate = "UPDATE persons SET " + update + " WHERE id = " + id;
         try (PreparedStatement ps = getConnection().prepareStatement(finalUpdate);){
+
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -71,13 +73,11 @@ public abstract class SQLBase implements IDatabaseController {
 
     public void removePersonsFromList (long id) {
         String delete = "DELETE FROM persons WHERE id =" + id;
-        try (PreparedStatement ps = getConnection().prepareStatement(delete);){
+        try (PreparedStatement ps = getConnection().prepareStatement(delete)){
+
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
-
-
 }
-
