@@ -15,8 +15,6 @@ import java.util.List;
 
 public class BinaryProcessor implements Executable {
 
-    public BinaryProcessor() {
-    }
 
     @Override
     public void create(String fileName, List<Person> persons) {

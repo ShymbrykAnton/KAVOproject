@@ -50,7 +50,6 @@ public class ChooseDataSourceButtonListener implements ActionListener {
         Executable executable = fileTypeFactory.getInstance(format);
         listenerController.setExecutable(executable);
         listenerController.setFilename(filename);
-        System.out.println(filename);
         listenerController.getTable().redrawTable(listenerController.getFilename(), listenerController.getExecutable());
     }
 }
