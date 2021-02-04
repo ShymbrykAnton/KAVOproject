@@ -11,7 +11,6 @@ public abstract class SQLBase implements IDatabaseController {
 
     public abstract Connection getConnection();
 
-
     public void addToDatabase(Person person) {
         String insert = "INSERT INTO persons (id,first_name,last_name,age,city) VALUES (?,?,?,?,?)";
         try (PreparedStatement ps = getConnection().prepareStatement(insert)) {
