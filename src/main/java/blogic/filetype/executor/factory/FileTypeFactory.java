@@ -9,11 +9,11 @@ import blogic.filetype.string.fileTypeConverter.impl.XmlConverter;
 import blogic.filetype.string.fileTypeConverter.impl.YamlConverter;
 import dao.DbProcessor;
 import dao.impl.nosql.Cassandra;
+import dao.impl.nosql.GraphDB;
 import dao.impl.nosql.Redis;
 import dao.impl.sql.H2;
 import dao.impl.sql.MySQL;
 import dao.impl.sql.PostgreSQL;
-import gui.buttonListeners.controller.ListenerController;
 
 import static util.Constants.DataSource.*;
 
@@ -31,6 +31,7 @@ public class FileTypeFactory {
     private final Executable h2 = new DbProcessor(new H2());
     private final Executable cassandra = new DbProcessor(new Cassandra());
     private final Executable redis = new DbProcessor(new Redis());
+    private final Executable graphDB = new DbProcessor(new GraphDB());
 
     public Executable getInstance(String format) {
         Executable instance;
@@ -64,6 +65,9 @@ public class FileTypeFactory {
                 break;
             case REDIS:
                 instance = redis;
+                break;
+            case GRAPH_DB:
+                instance = graphDB;
                 break;
             default:
                 throw new IllegalArgumentException();

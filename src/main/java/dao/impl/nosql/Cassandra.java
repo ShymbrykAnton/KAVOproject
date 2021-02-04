@@ -1,6 +1,5 @@
 package dao.impl.nosql;
 
-
 import blogic.model.Person;
 import com.datastax.driver.core.*;
 import dao.IDatabaseController;

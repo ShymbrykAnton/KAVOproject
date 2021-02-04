@@ -57,6 +57,11 @@
             <artifactId>jedis</artifactId>
             <version>3.5.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.neo4j.driver</groupId>
+            <artifactId>neo4j-java-driver</artifactId>
+            <version>4.2.0</version>
+        </dependency>
 
     </dependencies>
 </project>

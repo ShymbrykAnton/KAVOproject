@@ -36,10 +36,10 @@ public class Redis implements IDatabaseController {
 
     @Override
     public void updateDataInPerson(long id, String[] newValue) {
-        Jedis jedis = new Jedis("localhost");
         for (int count = 0; jedis.lindex("persons", count) != null; count++) {
             String read = jedis.lindex("persons", count);
             String[] arrayRead = read.split("\\s");
+//            read = read.substring(0, String.valueOf(newValue[0]).length()).trim();
             if (Integer.parseInt(arrayRead[0]) == id) {
                 jedis.lset("persons", count, newValue[0]+" "+newValue[1]+" "
                         +newValue[2]+" "+newValue[3]+" "+newValue[4]);
