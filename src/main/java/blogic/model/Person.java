@@ -3,20 +3,22 @@ package blogic.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import static util.Constants.View.*;
+
 public class Person implements Serializable {
     private long id;
     private String fName;
     private String lName;
-    private int age;
+    private byte age;
     private String city;
 
     public Person() {
     }
 
-    public Person(long id, String fName, String lname, int age, String city) {
+    public Person(long id, String fName, String lName, byte age, String city) {
         this.id = id;
         this.fName = fName;
-        this.lName = lname;
+        this.lName = lName;
         this.age = age;
         this.city = city;
     }
@@ -45,11 +47,11 @@ public class Person implements Serializable {
         this.lName = lName;
     }
 
-    public int getAge() {
+    public byte getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(byte age) {
         this.age = age;
     }
 
@@ -75,12 +77,12 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Id: " + id + ". First Name: " + fName + ". Last Name: " + lName + ". Age: " + age + ". City: " + city;
+        return String.format("%s: %s. %s: %s. %s: %s. %s: %s. %s: %s.",
+                ID, id, FIRST_NAME, fName, LAST_NAME, lName, AGE, age, CITY, city);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, fName, lName, age, city);
     }
-
 }

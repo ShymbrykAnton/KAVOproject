@@ -23,7 +23,8 @@ public class JsonConverter implements IFileTypeConverter {
 
     @Override
     public List<Person> getPersonsFromString(String strPersons) {
-        Type collectionType = new TypeToken<List<Person>>() {}.getType();
+        Type collectionType = new TypeToken<List<Person>>() {
+        }.getType();
         return json.fromJson(strPersons, collectionType);
     }
 }

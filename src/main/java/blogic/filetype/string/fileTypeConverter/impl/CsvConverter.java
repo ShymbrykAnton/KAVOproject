@@ -8,12 +8,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import static util.Constants.View.*;
 
 public class CsvConverter implements IFileTypeConverter {
     @Override
     public String getStrFromPersons(List<Person> persons) {
         String[][] values = new String[persons.size() + 1][5];
-        values[0] = new String[]{"id", "first name", "last name", "age", "city"};
+        values[0] = new String[]{ID, FIRST_NAME, LAST_NAME, AGE, CITY};
         int i = 1;
         for (Person person : persons) {
             values[i] = new String[]{String.valueOf(person.getId()), person.getFName(),
@@ -49,12 +50,12 @@ public class CsvConverter implements IFileTypeConverter {
             personsArray.add(s.split(","));
         }
         int i = 0;
-        if (personsArray.get(0)[0].equals("id")) {
+        if (personsArray.get(0)[0].equals(ID)) {
             i = 1;
         }
         while (i < personsArray.size()) {
             String[] value = personsArray.get(i);
-            Person person = new Person(Long.parseLong(value[0]), value[1], value[2], Integer.parseInt(value[3]), value[4]);
+            Person person = new Person(Long.parseLong(value[0]), value[1], value[2], Byte.parseByte(value[3]), value[4]);
             persons.add(person);
             i++;
         }
