@@ -14,7 +14,7 @@ public abstract class SQLBase implements IDatabaseController {
 
     public void addToDatabase(Person person) {
         String insert = "INSERT INTO persons (id,first_name,last_name,age,city) VALUES (?,?,?,?,?)";
-        try (PreparedStatement ps = getConnection().prepareStatement(insert)){
+        try (PreparedStatement ps = getConnection().prepareStatement(insert)) {
             ps.setLong(1, person.getId());
             ps.setString(2, person.getFName());
             ps.setString(3, person.getLName());
@@ -25,10 +25,11 @@ public abstract class SQLBase implements IDatabaseController {
             throwables.printStackTrace();
         }
     }
+
     public List<Person> readFromDatabase() {
         String select = "SELECT * FROM persons";
         List<Person> personList = new ArrayList<>();
-        try(Statement statement = getConnection().createStatement()) {
+        try (Statement statement = getConnection().createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(select);
 
@@ -42,39 +43,30 @@ public abstract class SQLBase implements IDatabaseController {
                 personList.add(person);
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
         return personList;
     }
 
     public void updateDataInPerson(long id, String[] newValue) {
-        String update = "";
-        if (!newValue[1].equals("")) {
-            update += "first_name=" + "'" + newValue[1] + "',";
-        }
-        if (!newValue[2].equals("")) {
-            update += "last_name=" + '\'' + newValue[2] + "',";
-        }
-        if (!newValue[3].equals("")) {
-            update += "age=" + '\'' + newValue[3] + "',";
-        }
-        if (!newValue[4].equals("")) {
-            update += "city=" + '\'' + newValue[4] + "'";
-        }
-        String finalUpdate = "UPDATE persons SET " + update + " WHERE id = " + id;
-        try (PreparedStatement ps = getConnection().prepareStatement(finalUpdate);){
-
+        String finalUpdate = "UPDATE persons SET first_name=?,last_name=?,age=?,city=? WHERE id = ?";
+        try (PreparedStatement ps = getConnection().prepareStatement(finalUpdate);) {
+            ps.setString(1, newValue[1]);
+            ps.setString(2, newValue[2]);
+            ps.setInt(3, Integer.parseInt(newValue[3]));
+            ps.setString(4, newValue[4]);
+            ps.setLong(5, id);
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
-    public void removePersonsFromList (long id) {
-        String delete = "DELETE FROM persons WHERE id =" + id;
-        try (PreparedStatement ps = getConnection().prepareStatement(delete)){
-
+    public void removePersonsFromList(long id) {
+        String delete = "DELETE FROM persons WHERE id = ?";
+        try (PreparedStatement ps = getConnection().prepareStatement(delete)) {
+            ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

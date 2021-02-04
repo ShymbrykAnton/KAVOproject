@@ -47,21 +47,10 @@ public class Cassandra implements IDatabaseController {
 
     @Override
     public void updateDataInPerson(long id, String[] newValue) {
-        String update = "";
-        if (!newValue[1].equals("")) {
-            update += "first_name=" + "'" + newValue[1] + "',";
-        }
-        if (!newValue[2].equals("")) {
-            update += "last_name=" + '\'' + newValue[2] + "',";
-        }
-        if (!newValue[3].equals("")) {
-            update += "age="  + newValue[3] + ",";
-        }
-        if (!newValue[4].equals("")) {
-            update += "city=" + '\'' + newValue[4] + "'";
-        }
-        String finalUpdate = "UPDATE persons SET " + update + " WHERE id = " + (int)id;
-        getSession().execute(finalUpdate);
+        String finalUpdate = "UPDATE persons SET first_name=?,last_name=?,age=?,city=? WHERE id = ?";
+        PreparedStatement preparedStatement = getSession().prepare(finalUpdate);
+        BoundStatement boundStatement = new BoundStatement(preparedStatement);
+        session.execute(boundStatement.bind(newValue[1],newValue[2],Integer.parseInt(newValue[3]),newValue[4],(int)id));
         cluster.close();
     }
 
