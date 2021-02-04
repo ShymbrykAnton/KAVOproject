@@ -3,8 +3,6 @@ package gui.buttonListeners;
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
 import gui.buttonListeners.controller.ListenerController;
-import util.io.FileHelper;
-
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +11,6 @@ import java.util.List;
 
 
 public class UpdateRecordButtonListener implements ActionListener {
-//    private final FileHelper fileHelper = new FileHelper();
     private final JTextField idTextField;
     private final JTextField fNameTextField;
     private final JTextField lNameTextField;
@@ -43,14 +40,29 @@ public class UpdateRecordButtonListener implements ActionListener {
         String fName = fNameTextField.getText();
         String lName = lNameTextField.getText();
         String age = ageTextField.getText();
-//        int ageValid = Integer.parseInt(age);
-//        fileHelper.ageValidation(ageValid);
         String city = cityTextField.getText();
-        String[] newValue = {id, fName, lName, age, city};
         personList = executable.read(filename);
-        executable.update(idNum, newValue, personList,filename);
-        listenerController.getTable().redrawTable(filename,executable);
+        for (Person iterPerson : personList) {
+            if (iterPerson.getId() == idNum) {
+                if (fName.equals("")) {
+                    fName = iterPerson.getFName();
+                }
+                if (lName.equals("")) {
+                    lName = iterPerson.getLName();
+                }
+                if (age.equals("")) {
+                    age = String.valueOf(iterPerson.getAge());
+                }
+                if (city.equals("")) {
+                    city = iterPerson.getCity();
+                }
+                break;
+            }
+        }
+        String[] newValue = {id, fName, lName, age, city};
 
+        executable.update(idNum, newValue, personList, filename);
+        listenerController.getTable().redrawTable(filename, executable);
         idTextField.setText("");
         fNameTextField.setText("");
         lNameTextField.setText("");

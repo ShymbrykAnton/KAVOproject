@@ -29,7 +29,6 @@ public class Update {
     private Person refactorPerson(Person newPerson, String[] newValue) {
         String[] updatingTypeValue = new String[]{"Id", "Fname", "Lname", "Age", "City"};
         for (int count = 0; count < 5; count++) {
-            if (!newValue[count].equals("")) {
                 switch (updatingTypeValue[count]) {
                     case ID:
                         newPerson.setId(Long.parseLong(newValue[count]));
@@ -50,7 +49,6 @@ public class Update {
                         throw new IllegalArgumentException();
                 }
             }
-        }
         return newPerson;
     }
 }
