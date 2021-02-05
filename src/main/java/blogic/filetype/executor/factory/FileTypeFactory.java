@@ -10,6 +10,7 @@ import blogic.filetype.string.fileTypeConverter.impl.YamlConverter;
 import dao.DbProcessor;
 import dao.impl.nosql.Cassandra;
 import dao.impl.nosql.GraphDB;
+import dao.impl.nosql.MongoDB;
 import dao.impl.nosql.Redis;
 import dao.impl.sql.H2;
 import dao.impl.sql.MySQL;
@@ -32,6 +33,7 @@ public class FileTypeFactory {
     private final Executable cassandra = new DbProcessor(new Cassandra());
     private final Executable redis = new DbProcessor(new Redis());
     private final Executable graphDB = new DbProcessor(new GraphDB());
+    private final Executable mongoDB = new DbProcessor(new MongoDB());
 
     public Executable getInstance(String format) {
         Executable instance;
@@ -68,6 +70,9 @@ public class FileTypeFactory {
                 break;
             case GRAPH_DB:
                 instance = graphDB;
+                break;
+            case MONGO_DB:
+                instance = mongoDB;
                 break;
             default:
                 throw new IllegalArgumentException();
