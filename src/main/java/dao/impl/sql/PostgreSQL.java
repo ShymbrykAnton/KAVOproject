@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class PostgreSQL extends SQLBase{
+public class PostgreSQL extends SQLBase {
+    //если сделать апдейт возраста(за пределами байта) то роизойдет какая то дичь
     @Override
     public Connection getConnection() {
         Connection connection = null;

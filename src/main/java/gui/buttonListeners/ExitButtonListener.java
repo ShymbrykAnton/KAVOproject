@@ -14,8 +14,14 @@ public class ExitButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int res = JOptionPane.showConfirmDialog(new JLabel(), EXIT_CONFORMATION,
-                CONFIRM_WINDOW, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int res = JOptionPane.showConfirmDialog(
+                new JLabel(),
+                EXIT_CONFORMATION,
+                CONFIRM_WINDOW,
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
         if (res == JOptionPane.YES_OPTION) {
             System.exit(0);
         }

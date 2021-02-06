@@ -2,7 +2,6 @@ package blogic.filetype.string;
 
 import blogic.filetype.executor.Executable;
 import blogic.filetype.string.fileTypeConverter.IFileTypeConverter;
-import gui.buttonListeners.controller.ListenerController;
 import util.io.FileHelper;
 import blogic.model.Person;
 
@@ -27,14 +26,14 @@ public class StringProcessor implements Executable {
     }
 
     @Override
-    public void update(long id,  String[] newValue, List<Person> personList, String filename) {
+    public void update(long id, String[] newValue, List<Person> personList, String filename) {
         personList = converter.updateDataInPerson(id, newValue, personList);
-        create(filename,personList);
+        create(filename, personList);
     }
 
     @Override
     public void delete(long id, List<Person> personList, String filename) {
         personList = converter.removePersonsFromList(id, personList);
-        create(filename,personList);
+        create(filename, personList);
     }
 }

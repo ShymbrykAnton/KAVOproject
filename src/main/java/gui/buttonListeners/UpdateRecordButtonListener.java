@@ -19,9 +19,13 @@ public class UpdateRecordButtonListener implements ActionListener {
     private final ListenerController listenerController;
 
 
-    public UpdateRecordButtonListener(JTextField idTextField, JTextField fNameTextField,
-                                      JTextField lNameTextField, JTextField ageTextField,
-                                      JTextField cityTextField, ListenerController listenerController) {
+    public UpdateRecordButtonListener(JTextField idTextField,
+                                      JTextField fNameTextField,
+                                      JTextField lNameTextField,
+                                      JTextField ageTextField,
+                                      JTextField cityTextField,
+                                      ListenerController listenerController) {
+
         this.idTextField = idTextField;
         this.fNameTextField = fNameTextField;
         this.lNameTextField = lNameTextField;
@@ -32,17 +36,24 @@ public class UpdateRecordButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         String filename = listenerController.getFilename();
         Executable executable = listenerController.getExecutable();
+
         List<Person> personList;
+
         String id = idTextField.getText();
+
         long idNum = Long.parseLong(id);
         String fName = fNameTextField.getText();
         String lName = lNameTextField.getText();
         String age = ageTextField.getText();
         String city = cityTextField.getText();
+
         personList = executable.read(filename);
+
         for (Person iterPerson : personList) {
+
             if (iterPerson.getId() == idNum) {
                 if (fName.equals("")) {
                     fName = iterPerson.getFName();
@@ -62,7 +73,9 @@ public class UpdateRecordButtonListener implements ActionListener {
         String[] newValue = {id, fName, lName, age, city};
 
         executable.update(idNum, newValue, personList, filename);
+
         listenerController.getTable().redrawTable(filename, executable);
+
         idTextField.setText("");
         fNameTextField.setText("");
         lNameTextField.setText("");

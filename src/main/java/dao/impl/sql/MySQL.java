@@ -8,9 +8,11 @@ public class MySQL extends SQLBase {
     @Override
     public Connection getConnection() {
         Connection connection = null;
+
         String connectionUrl = "jdbc:mysql://localhost:3306/public";
         String loginDb = "root";
         String password = "1234";
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {

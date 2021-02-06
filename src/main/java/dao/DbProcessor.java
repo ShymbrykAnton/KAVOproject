@@ -3,7 +3,6 @@ package dao;
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class DbProcessor implements Executable {
@@ -15,9 +14,7 @@ public class DbProcessor implements Executable {
 
     @Override
     public void create(String fileName, List<Person> persons) {
-        Iterator<Person> iterator = persons.iterator();
-        while (iterator.hasNext()) {
-            Person iterPerson = iterator.next();
+        for (Person iterPerson : persons) {
             iDatabaseController.addToDatabase(iterPerson);
         }
     }

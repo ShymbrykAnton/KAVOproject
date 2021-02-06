@@ -2,7 +2,6 @@ package blogic.filetype.binary;
 
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
-import gui.buttonListeners.controller.ListenerController;
 import util.update.Update;
 
 import java.io.IOException;
@@ -21,8 +20,10 @@ public class BinaryProcessor implements Executable {
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(fileName);
+
             ObjectOutputStream outputStream = new ObjectOutputStream(fos);
             outputStream.writeObject(persons);
+
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -34,11 +35,14 @@ public class BinaryProcessor implements Executable {
     public List<Person> read(String fileName) {
         FileInputStream fis;
         List<Person> person1 = new ArrayList<>();
+
         try {
             fis = new FileInputStream(fileName);
+
             ObjectInputStream ois = new ObjectInputStream(fis);
             @SuppressWarnings("unchecked")
             List<Person> person = (List<Person>) ois.readObject();
+
             return person;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -52,8 +56,6 @@ public class BinaryProcessor implements Executable {
         update.updating(id, newValue, personList);
         create(filename,personList);
     }
-
-
 
     @Override
     public void delete(long id, List<Person> personList, String filename) {

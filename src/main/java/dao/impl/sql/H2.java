@@ -10,9 +10,11 @@ public class H2 extends SQLBase {
     public Connection getConnection() {
         //запусти бат в C:\Users\User\h2\bin для ремоут входа, для Embded
         Connection connection = null;
+
         String connectionUrl = "jdbc:h2:tcp://localhost/~/H2";
         String loginDb = "sa";
         String password = "";
+
         try {
             Class.forName("org.h2.Driver");
         } catch (ClassNotFoundException e) {

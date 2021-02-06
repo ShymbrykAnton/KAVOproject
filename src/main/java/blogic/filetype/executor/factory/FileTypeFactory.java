@@ -20,8 +20,6 @@ import static util.Constants.DataSource.*;
 
 public class FileTypeFactory {
 
-    public FileTypeFactory() {
-    }
     private final Executable binaryExecutable = new BinaryProcessor();
     private final Executable jsonExecutable = new StringProcessor(new JsonConverter());
     private final Executable xmlExecutable = new StringProcessor(new XmlConverter());
@@ -79,5 +77,4 @@ public class FileTypeFactory {
         }
         return instance;
     }
-
 }

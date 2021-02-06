@@ -19,13 +19,13 @@ public class FileHelper {
         return file.length() == 0;
     }
 
-    public void ageValidation(int age) {
+    public void ageValidation(int age) throws IllegalArgumentException {
         if (age > 120) {
             throw new IllegalArgumentException(ILLEGAL_AGE);
         }
     }
 
-    public void idValidation(List<Person> personList, long id) {
+    public void idValidation(List<Person> personList, long id) throws IllegalArgumentException {
         if (isIdLegal(personList, id)) {
             throw new IllegalArgumentException(ILLEGAL_PERSON_ID);
         }
