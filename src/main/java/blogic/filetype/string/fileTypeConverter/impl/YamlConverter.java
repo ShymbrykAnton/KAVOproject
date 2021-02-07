@@ -17,7 +17,6 @@ public class YamlConverter implements IFileTypeConverter {
         mapper = new ObjectMapper(new YAMLFactory());
     }
 
-
     @Override
     public String getStrFromPersons(List<Person> persons) {
         String perssonString = "";

@@ -24,9 +24,12 @@ public class CreateNewRecordButtonListener implements ActionListener {
     private final JTextField cityTextField;
     private final ListenerController listenerController;
 
-    public CreateNewRecordButtonListener(JTextField idTextField, JTextField fNameTextField,
-                                         JTextField lNameTextField, JTextField ageTextField,
-                                         JTextField cityTextField, ListenerController listenerController) {
+    public CreateNewRecordButtonListener(JTextField idTextField,
+                                         JTextField fNameTextField,
+                                         JTextField lNameTextField,
+                                         JTextField ageTextField,
+                                         JTextField cityTextField,
+                                         ListenerController listenerController) {
         this.idTextField = idTextField;
         this.fNameTextField = fNameTextField;
         this.lNameTextField = lNameTextField;
@@ -37,22 +40,39 @@ public class CreateNewRecordButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         String filename = listenerController.getFilename();
+
         Executable executable = listenerController.getExecutable();
+
         String format = filename.substring(filename.lastIndexOf('.') + 1);
+
         List<Person> personList;
-        if (format.equals(MY_SQL) || format.equals(POSTGRE_SQL) || format.equals(CASSANDRA) || format.equals(GRAPH_DB)
-                || format.equals(H2)|| format.equals(MONGO_DB)||format.equals(REDIS)||fileHelper.fileExists(filename)) {
+        if (format.equals(MY_SQL)
+                || format.equals(POSTGRE_SQL) || format.equals(CASSANDRA)
+                || format.equals(GRAPH_DB) || format.equals(H2)
+                || format.equals(MONGO_DB) || format.equals(REDIS)
+                || fileHelper.fileExists(filename)) {
             personList = executable.read(filename);
-        } else  {
+
+        } else {
             personList = new ArrayList<>();
+
         }
+
         long id = Long.parseLong(idTextField.getText());
+
+
         fileHelper.idValidation(personList, id);
+
         String firstName = fNameTextField.getText();
         String lastName = lNameTextField.getText();
         byte age = Byte.parseByte((ageTextField.getText()));
-//        fileHelper.ageValidation(age);
+        //надо протестить
+
+        fileHelper.ageValidation(age);
+
+
         String city = cityTextField.getText();
 
         if (!fileHelper.fileExists(filename)) {
@@ -62,8 +82,10 @@ public class CreateNewRecordButtonListener implements ActionListener {
         }
 
         personList.add(new Person(id, firstName, lastName, age, city));
+
         executable.create(filename, personList);
-        listenerController.getTable().redrawTable(filename,executable);
+
+        listenerController.getTable().redrawTable(filename, executable);
 
         idTextField.setText("");
         fNameTextField.setText("");

@@ -1,23 +1,29 @@
 package dao.impl.sql;
 
+import dao.impl.sql.base.SQLBase;
+import util.Constants;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class PostgreSQL extends SQLBase{
+public class PostgreSQL extends SQLBase {
+    //если сделать апдейт возраста(за пределами байта) то роизойдет какая то дичь
     @Override
     public Connection getConnection() {
         Connection connection = null;
-        String connectionUrl = "jdbc:postgresql://localhost:5432/person";
-        String loginDb = "postgres";
-        String password = "11.04shekel1948";
+
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName(Constants.PostgreSQL.DRIVER_NAME);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            connection = DriverManager.getConnection(connectionUrl, loginDb, password);
+            connection = DriverManager.getConnection(
+                    Constants.PostgreSQL.CONNECTION_URL,
+                    Constants.PostgreSQL.LOGIN_DB,
+                    Constants.PostgreSQL.PASSWORD_DB
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }

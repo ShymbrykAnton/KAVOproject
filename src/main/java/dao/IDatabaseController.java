@@ -5,7 +5,7 @@ import blogic.model.Person;
 import java.util.List;
 
 public interface IDatabaseController {
-    public abstract void addToDatabase(Person person);
+    void addToDatabase(Person person);
 
     List<Person> readFromDatabase();
 
