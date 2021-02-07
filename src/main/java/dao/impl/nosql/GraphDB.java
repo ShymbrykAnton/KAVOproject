@@ -4,6 +4,7 @@ import blogic.model.Person;
 import dao.IDatabaseController;
 import org.neo4j.driver.*;
 import org.neo4j.driver.Record;
+import util.Constants;
 
 import java.util.*;
 
@@ -12,8 +13,10 @@ public class GraphDB implements IDatabaseController {
 
     //зачем статик?
     private static Driver getDriver() {
-        driver = GraphDatabase.driver("bolt://localhost:7687",
-                AuthTokens.basic("neo4j", "1234"));
+        driver = GraphDatabase.driver(
+                Constants.GraphDB.CONNECTION_URL,
+                AuthTokens.basic(Constants.GraphDB.LOGIN_DB, Constants.GraphDB.PASSWORD_DB)
+        );
         return driver;
     }
 
@@ -22,15 +25,13 @@ public class GraphDB implements IDatabaseController {
         try (Session session = getDriver().session()) {
             Map<String, Object> params = new HashMap<>();
 
-            params.put("id", person.getId());
-            params.put("fname", person.getFName());
-            params.put("lname", person.getLName());
-            params.put("age", person.getAge());
-            params.put("city", person.getCity());
+            params.put(Constants.GraphDB.ID_FIELD, person.getId());
+            params.put(Constants.GraphDB.FIRST_NAME_FIELD, person.getFName());
+            params.put(Constants.GraphDB.LAST_NAME_FIELD, person.getLName());
+            params.put(Constants.GraphDB.AGE_FIELD, person.getAge());
+            params.put(Constants.GraphDB.CITY_FIELD, person.getCity());
 
-            String update = "CREATE (n:persons {id: $id, fname: $fname, lname: $lname, age: $age, city: $city})";
-
-            session.run(update, params);
+            session.run(Constants.GraphDB.CREATE, params);
         }
         driver.close();
     }
@@ -42,7 +43,7 @@ public class GraphDB implements IDatabaseController {
         Person person;
         try (Session session = getDriver().session()) {
 
-            Result result = session.run("MATCH (n) RETURN n.id, n.fname, n.lname, n.age, n.city");
+            Result result = session.run(Constants.GraphDB.SELECT);
 
             while (result.hasNext()) {
                 Record record = result.next();
@@ -67,15 +68,13 @@ public class GraphDB implements IDatabaseController {
 
             Map<String, Object> params = new HashMap<>();
 
-            params.put("id", id);
-            params.put("fname", newValue[1]);
-            params.put("lname", newValue[2]);
-            params.put("age", Integer.parseInt(newValue[3]));
-            params.put("city", newValue[4]);
+            params.put(Constants.GraphDB.ID_FIELD, id);
+            params.put(Constants.GraphDB.FIRST_NAME_FIELD, newValue[1]);
+            params.put(Constants.GraphDB.LAST_NAME_FIELD, newValue[2]);
+            params.put(Constants.GraphDB.AGE_FIELD, Integer.parseInt(newValue[3]));
+            params.put(Constants.GraphDB.CITY_FIELD, newValue[4]);
 
-            String update = "MATCH (n { id: $id }) SET n.lname = $lname, n.fname = $fname, n.age = $age, n.city = $city";
-
-            session.run(update, params);
+            session.run(Constants.GraphDB.UPDATE, params);
         }
         driver.close();
     }
@@ -86,11 +85,9 @@ public class GraphDB implements IDatabaseController {
 
             Map<String, Object> params = new HashMap<>();
 
-            params.put("id", id);
+            params.put(Constants.GraphDB.ID_FIELD, id);
 
-            String update = "MATCH (n { id: $id }) DETACH DELETE n";
-
-            session.run(update, params);
+            session.run(Constants.GraphDB.DELETE, params);
         }
         driver.close();
     }

@@ -1,7 +1,8 @@
-package dao;
+package dao.impl;
 
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
+import dao.IDatabaseController;
 
 import java.util.List;
 

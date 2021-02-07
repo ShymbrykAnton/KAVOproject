@@ -3,6 +3,7 @@ package gui.buttonListeners;
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
 import gui.buttonListeners.controller.ListenerController;
+import util.io.FileHelper;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,6 +18,7 @@ public class UpdateRecordButtonListener implements ActionListener {
     private final JTextField ageTextField;
     private final JTextField cityTextField;
     private final ListenerController listenerController;
+    private final FileHelper fileHelper = new FileHelper();
 
 
     public UpdateRecordButtonListener(JTextField idTextField,
@@ -44,10 +46,15 @@ public class UpdateRecordButtonListener implements ActionListener {
 
         String id = idTextField.getText();
 
+
         long idNum = Long.parseLong(id);
+
         String fName = fNameTextField.getText();
         String lName = lNameTextField.getText();
         String age = ageTextField.getText();
+        //надо протестить
+        fileHelper.ageValidation(Integer.parseInt(age));
+
         String city = cityTextField.getText();
 
         personList = executable.read(filename);

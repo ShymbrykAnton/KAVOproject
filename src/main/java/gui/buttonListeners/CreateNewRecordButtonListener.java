@@ -62,17 +62,16 @@ public class CreateNewRecordButtonListener implements ActionListener {
 
         long id = Long.parseLong(idTextField.getText());
 
-        try {
-            fileHelper.idValidation(personList, id);
-        } catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
-        }
+
+        fileHelper.idValidation(personList, id);
 
         String firstName = fNameTextField.getText();
         String lastName = lNameTextField.getText();
         byte age = Byte.parseByte((ageTextField.getText()));
         //надо протестить
+
         fileHelper.ageValidation(age);
+
 
         String city = cityTextField.getText();
 

@@ -7,7 +7,7 @@ import blogic.filetype.string.fileTypeConverter.impl.CsvConverter;
 import blogic.filetype.string.fileTypeConverter.impl.JsonConverter;
 import blogic.filetype.string.fileTypeConverter.impl.XmlConverter;
 import blogic.filetype.string.fileTypeConverter.impl.YamlConverter;
-import dao.DbProcessor;
+import dao.impl.DbProcessor;
 import dao.impl.nosql.Cassandra;
 import dao.impl.nosql.GraphDB;
 import dao.impl.nosql.MongoDB;

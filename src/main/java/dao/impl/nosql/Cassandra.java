@@ -3,6 +3,7 @@ package dao.impl.nosql;
 import blogic.model.Person;
 import com.datastax.driver.core.*;
 import dao.IDatabaseController;
+import util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,18 +13,17 @@ public class Cassandra implements IDatabaseController {
     private Cluster cluster;
 
     private Session getSession() {
-        cluster = Cluster.builder().addContactPoint("localhost").build();
+        cluster = Cluster.builder().addContactPoint(Constants.Cassandra.LOGIN_DB).build();
 
-        session = cluster.connect("cassandra");
+        session = cluster.connect(Constants.Cassandra.KEYSPACE);
 
         return session;
     }
 
     @Override
     public void addToDatabase(Person person) {
-        String create = "INSERT INTO persons (id,first_name,last_name,age,city) VALUES (?,?,?,?,?)";
 
-        PreparedStatement preparedStatement = getSession().prepare(create);
+        PreparedStatement preparedStatement = getSession().prepare(Constants.Cassandra.INSERT);
 
         BoundStatement boundStatement = new BoundStatement(preparedStatement);
 
@@ -45,15 +45,15 @@ public class Cassandra implements IDatabaseController {
 
         Person person;
 
-        ResultSet resultset = getSession().execute("SELECT * FROM persons");
+        ResultSet resultset = getSession().execute(Constants.Cassandra.SELECT);
 
         for (Row row : resultset) {
 
-            int id = (row.getInt("id"));
-            String first_name = row.getString("first_name");
-            String last_name = row.getString("last_name");
-            int age = row.getInt("age");
-            String city = row.getString("city");
+            int id = (row.getInt(Constants.Cassandra.ID_FIELD));
+            String first_name = row.getString(Constants.Cassandra.FIRST_NAME_FIELD);
+            String last_name = row.getString(Constants.Cassandra.LAST_NAME_FIELD);
+            int age = row.getInt(Constants.Cassandra.AGE_FIELD);
+            String city = row.getString(Constants.Cassandra.CITY_FIELD);
 
             person = new Person(id, first_name, last_name, (byte) age, city);
 
@@ -65,9 +65,8 @@ public class Cassandra implements IDatabaseController {
 
     @Override
     public void updateDataInPerson(long id, String[] newValue) {
-        String finalUpdate = "UPDATE persons SET first_name=?,last_name=?,age=?,city=? WHERE id = ?";
 
-        PreparedStatement preparedStatement = getSession().prepare(finalUpdate);
+        PreparedStatement preparedStatement = getSession().prepare(Constants.Cassandra.UPDATE);
 
         BoundStatement boundStatement = new BoundStatement(preparedStatement);
 
@@ -85,9 +84,8 @@ public class Cassandra implements IDatabaseController {
 
     @Override
     public void removePersonsFromList(long id) {
-        String delete = "DELETE FROM persons WHERE id = ?";
 
-        PreparedStatement preparedStatement = getSession().prepare(delete);
+        PreparedStatement preparedStatement = getSession().prepare(Constants.Cassandra.DELETE);
 
         BoundStatement boundStatement = new BoundStatement(preparedStatement);
 
