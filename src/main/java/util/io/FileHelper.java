@@ -20,9 +20,14 @@ public class FileHelper {
         }
     }
 
-    public void idValidation(List<Person> personList, long id) throws IllegalArgumentException {
-
+    public void idValidationForCreate(List<Person> personList, long id) throws IllegalArgumentException {
         if (isIdLegal(personList, id)) {
+            throw new IllegalArgumentException(ILLEGAL_PERSON_ID);
+        }
+    }
+
+    public void idValidationForUpdDel(List<Person> personList, long id) throws IllegalArgumentException {
+        if (!isIdLegal(personList, id)) {
             throw new IllegalArgumentException(ILLEGAL_PERSON_ID);
         }
     }

@@ -8,11 +8,9 @@ import javax.swing.*;
 public class ListenerController {
     private String filename = "";
     private Executable executable;
-    private final JFrame frame;
     private final Table table;
 
     public ListenerController(JFrame frame) {
-        this.frame = frame;
         table = new Table(frame);
 
     }

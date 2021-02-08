@@ -6,6 +6,7 @@ import gui.buttonListeners.controller.ListenerController;
 import util.io.FileHelper;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -45,22 +46,24 @@ public class UpdateRecordButtonListener implements ActionListener {
         List<Person> personList;
 
         String id = idTextField.getText();
-
-
         long idNum = Long.parseLong(id);
-
         String fName = fNameTextField.getText();
         String lName = lNameTextField.getText();
         String age = ageTextField.getText();
         //надо протестить
-        fileHelper.ageValidation(Integer.parseInt(age));
+        if (!age.equals("")) {
+            try {
+                fileHelper.ageValidation(Integer.parseInt(age));
+            } catch (IllegalArgumentException exception) {
+                JOptionPane.showMessageDialog(new Label(), exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
 
         String city = cityTextField.getText();
-
         personList = executable.read(filename);
 
         for (Person iterPerson : personList) {
-
             if (iterPerson.getId() == idNum) {
                 if (fName.equals("")) {
                     fName = iterPerson.getFName();
