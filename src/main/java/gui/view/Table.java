@@ -2,6 +2,7 @@ package gui.view;
 
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
+import util.PersonComparator;
 import util.io.FileHelper;
 
 import javax.swing.*;
@@ -16,6 +17,7 @@ import static util.Constants.DataSource.*;
 
 public class Table {
     private final FileHelper fileHelper = new FileHelper();
+    private final PersonComparator pc = new PersonComparator();
     private final JFrame frame;
     private JScrollPane scrollPane;
 
@@ -34,7 +36,7 @@ public class Table {
                 || fileHelper.fileExists(fileName)) {
 
             personList = executable.read(fileName);
-
+            personList.sort(pc);
         } else {
             personList = new ArrayList<>();
         }
