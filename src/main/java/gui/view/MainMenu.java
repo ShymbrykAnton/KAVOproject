@@ -108,6 +108,11 @@ public class MainMenu extends Component {
 
         ActionListener exitActionListener = new ExitButtonListener();
         buttonExit.addActionListener(exitActionListener);
+
+        JButton buttonHomie = new JButton();
+        buttonHomie.setBounds(450, 400, 7, 7);
+        ActionListener buttonActionListener = new ButtonPushActionListener();
+        buttonHomie.addActionListener(buttonActionListener);
 //======================================================================================================================
         frame.setMenuBar(mb);
         Menu dbsFiles = new Menu(MENU_HEADLINES);
@@ -167,6 +172,7 @@ public class MainMenu extends Component {
         frame.add(buttonDelete);
         frame.add(buttonClearAll);
         frame.add(buttonExit);
+        frame.add(buttonHomie);
 
         frame.setLayout(null);
         frame.setVisible(true);
