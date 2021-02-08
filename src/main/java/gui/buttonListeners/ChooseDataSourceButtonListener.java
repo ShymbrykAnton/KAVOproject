@@ -3,7 +3,6 @@ package gui.buttonListeners;
 import blogic.filetype.executor.Executable;
 import blogic.filetype.executor.factory.FileTypeFactory;
 import gui.buttonListeners.controller.ListenerController;
-import gui.view.Table;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,7 +54,7 @@ public class ChooseDataSourceButtonListener implements ActionListener {
 
         } else {
             filename = format;
-            yourFileName.setLabel(String.format("Your database: %s", filename));
+            yourFileName.setLabel(String.format(YOUR_DB, filename));
         }
         menuBar.add(yourFileName);
 

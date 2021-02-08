@@ -16,10 +16,10 @@ public class Redis implements IDatabaseController {
     public void addToDatabase(Person person) {
         jedis.lpush(
                 Constants.Redis.KEY,
-                person.getId() + " "
-                        + person.getFName() + " "
-                        + person.getLName() + " "
-                        + person.getAge() + " "
+                person.getId() + Constants.Redis.SEPARATOR
+                        + person.getFName() + Constants.Redis.SEPARATOR
+                        + person.getLName() + Constants.Redis.SEPARATOR
+                        + person.getAge() + Constants.Redis.SEPARATOR
                         + person.getCity()
         );
         jedis.close();
@@ -58,10 +58,10 @@ public class Redis implements IDatabaseController {
                 jedis.lset(
                         Constants.Redis.KEY,
                         count,
-                        newValue[0] + " "
-                                + newValue[1] + " "
-                                + newValue[2] + " "
-                                + newValue[3] + " "
+                        newValue[0] + Constants.Redis.SEPARATOR
+                                + newValue[1] + Constants.Redis.SEPARATOR
+                                + newValue[2] + Constants.Redis.SEPARATOR
+                                + newValue[3] + Constants.Redis.SEPARATOR
                                 + newValue[4]
                 );
             }
