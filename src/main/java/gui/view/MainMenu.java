@@ -176,6 +176,7 @@ public class MainMenu extends Component {
         frame.setSize(900, 600);
 
         frame.setLocationRelativeTo(null);
+
 //======================================================================================================================
 //        frame.getContentPane().setBackground(Color.WHITE);
 
@@ -202,4 +203,5 @@ public class MainMenu extends Component {
 //        if (res == JOptionPane.YES_OPTION) {
 //            System.exit(0);
 //        }
+
 }

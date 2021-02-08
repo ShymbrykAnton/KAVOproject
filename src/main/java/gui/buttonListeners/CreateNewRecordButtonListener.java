@@ -3,10 +3,10 @@ package gui.buttonListeners;
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
 import gui.buttonListeners.controller.ListenerController;
-import gui.view.Table;
 import util.io.FileHelper;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -42,11 +42,9 @@ public class CreateNewRecordButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         String filename = listenerController.getFilename();
-
         Executable executable = listenerController.getExecutable();
 
         String format = filename.substring(filename.lastIndexOf('.') + 1);
-
         List<Person> personList;
         if (format.equals(MY_SQL)
                 || format.equals(POSTGRE_SQL) || format.equals(CASSANDRA)
@@ -54,23 +52,22 @@ public class CreateNewRecordButtonListener implements ActionListener {
                 || format.equals(MONGO_DB) || format.equals(REDIS)
                 || fileHelper.fileExists(filename)) {
             personList = executable.read(filename);
-
         } else {
             personList = new ArrayList<>();
-
         }
 
         long id = Long.parseLong(idTextField.getText());
-
-
-        fileHelper.idValidation(personList, id);
-
         String firstName = fNameTextField.getText();
         String lastName = lNameTextField.getText();
-        byte age = Byte.parseByte((ageTextField.getText()));
+        int age = Integer.parseInt((ageTextField.getText()));
         //надо протестить
-
-        fileHelper.ageValidation(age);
+        try {
+            fileHelper.idValidationForCreate(personList, id);
+            fileHelper.ageValidation(age);
+        } catch (IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(new Label(),exception.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
 
         String city = cityTextField.getText();
@@ -81,7 +78,7 @@ public class CreateNewRecordButtonListener implements ActionListener {
             personList = executable.read(filename);
         }
 
-        personList.add(new Person(id, firstName, lastName, age, city));
+        personList.add(new Person(id, firstName, lastName, (byte) age, city));
 
         executable.create(filename, personList);
 

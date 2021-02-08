@@ -145,7 +145,7 @@ public class Constants {
     public static class Redis{
         public static final String JEDIS = "localhost";
         public static final String KEY = "persons";
-        public static final String REGEX = "persons";
+        public static final String REGEX = "\\s";
     }
 
 }
