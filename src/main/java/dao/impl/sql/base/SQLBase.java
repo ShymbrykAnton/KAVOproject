@@ -73,4 +73,13 @@ public abstract class SQLBase implements IDatabaseController {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void clearAll(String filename) {
+        try (PreparedStatement ps = getConnection().prepareStatement("DELETE FROM persons WHERE id>0")) {
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

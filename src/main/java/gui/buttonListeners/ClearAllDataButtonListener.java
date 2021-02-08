@@ -25,7 +25,6 @@ public class ClearAllDataButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String filename = listenerController.getFilename();
         Executable executable = listenerController.getExecutable();
-        List<Person> personList;
 
         JLabel confirmLabel = new JLabel(CLEAR_FILE);
         int option = JOptionPane.showConfirmDialog(
@@ -34,8 +33,7 @@ public class ClearAllDataButtonListener implements ActionListener {
         );
 
         if (option == JOptionPane.YES_OPTION) {
-            personList = new ArrayList<>();
-            executable.create(filename, personList);
+            executable.clearAll(filename);
             listenerController
                     .getTable()
                     .redrawTable(filename, executable);

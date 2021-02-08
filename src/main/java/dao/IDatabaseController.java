@@ -12,4 +12,6 @@ public interface IDatabaseController {
     void updateDataInPerson(long id, String[] newValue);
 
     void removePersonsFromList(long id);
+
+    void clearAll(String filename);
 }

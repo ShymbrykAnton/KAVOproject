@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class BinaryProcessor implements Executable {
 
 
@@ -54,12 +53,17 @@ public class BinaryProcessor implements Executable {
     public void update(long id, String[] newValue, List<Person> personList, String filename) {
         Update update = new Update();
         update.updating(id, newValue, personList);
-        create(filename,personList);
+        create(filename, personList);
     }
 
     @Override
     public void delete(long id, List<Person> personList, String filename) {
         personList.removeIf(person -> person.getId() == id);
-        create(filename,personList);
+        create(filename, personList);
+    }
+
+    @Override
+    public void clearAll(String filename) {
+        create(filename, new ArrayList<>());
     }
 }

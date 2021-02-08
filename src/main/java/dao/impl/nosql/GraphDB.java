@@ -82,12 +82,25 @@ public class GraphDB implements IDatabaseController {
     @Override
     public void removePersonsFromList(long id) {
         try (Session session = getDriver().session()) {
-
             Map<String, Object> params = new HashMap<>();
-
             params.put(Constants.GraphDB.ID_FIELD, id);
-
             session.run(Constants.GraphDB.DELETE, params);
+        }
+        driver.close();
+    }
+
+    @Override
+    public void clearAll(String filename) {
+        try (Session session = getDriver().session()){
+            long id;
+            Result result = session.run(Constants.GraphDB.SELECT);
+            while (result.hasNext()) {
+                Record record = result.next();
+                id = record.values().get(0).asLong();
+                Map<String, Object> params = new HashMap<>();
+                params.put(Constants.GraphDB.ID_FIELD, id);
+                session.run(Constants.GraphDB.DELETE, params);
+            }
         }
         driver.close();
     }
