@@ -1,9 +1,5 @@
 package util;
 
-import blogic.model.Person;
-
-import java.util.List;
-
 public class Constants {
 
     public static class View {
@@ -41,7 +37,10 @@ public class Constants {
         public final static String CLEAR_WARNING = "Do you really want to delete all data in %s.";
         public final static String EXIT_CONFORMATION = "Are you sure you want to close the application?";
         public final static String LABEL_FORMAT = "%s: ";
-        public static final String ILLEGAL_PERSON_ID = "This id is busy.";
+        public static final String ILLEGAL_PERSON_ID_IS_BUSY = "This id is busy.";
+        public static final String ILLEGAL_PERSON_ID = "Id cannot be negative.";
+        public static final String PERSON_ID_NOT_FOUND = "Id not found.";
+        public static final String ID_FIELD_IS_EMPTY = "Id field is empty.";
         public static final String ILLEGAL_AGE = "Incorrect age, max age = 100.";
         public static final String ERROR = "Error";
     }
@@ -89,7 +88,7 @@ public class Constants {
     public static class PostgreSQL {
         public final static String CONNECTION_URL = "jdbc:postgresql://localhost:5432/person";
         public final static String LOGIN_DB = "postgres";
-        public final static String PASSWORD_DB = "11.04shekel1948";
+        public final static String PASSWORD_DB = "1234";
         public final static String DRIVER_NAME = "org.postgresql.Driver";
     }
 
