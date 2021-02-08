@@ -21,6 +21,12 @@ public class UpdateRecordButtonListener implements ActionListener {
     private final JTextField cityTextField;
     private final ListenerController listenerController;
     private final FileHelper fileHelper = new FileHelper();
+    String id;
+    String fName;
+    String lName;
+    String age;
+    String city;
+    long idNum;
 
 
     public UpdateRecordButtonListener(JTextField idTextField,
@@ -40,20 +46,17 @@ public class UpdateRecordButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        id = idTextField.getText();
+        fName = fNameTextField.getText();
+        lName = lNameTextField.getText();
+        age = ageTextField.getText();
+        city = cityTextField.getText();
 
         String filename = listenerController.getFilename();
         Executable executable = listenerController.getExecutable();
 
         List<Person> personList = executable.read(filename);
 
-
-        String id = idTextField.getText();
-
-        String fName = fNameTextField.getText();
-        String lName = lNameTextField.getText();
-        String age = ageTextField.getText();
-
-        long idNum = 0;
         if (!ageTextField.getText().equals("") || !idTextField.getText().equals("")) {
             try {
                 idNum = Long.parseLong(id);
@@ -71,8 +74,14 @@ public class UpdateRecordButtonListener implements ActionListener {
                     lNameTextField, ageTextField, cityTextField);
             return;
         }
-        String city = cityTextField.getText();
 
+        String[] newValue = getNewValue(personList);
+        executable.update(idNum, newValue, personList, filename);
+        listenerController.getTable().redrawTable();
+        listenerController.setTextFieldEmpty(idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField);
+    }
+
+    private String[] getNewValue(List<Person> personList) {
         for (Person iterPerson : personList) {
             if (iterPerson.getId() == idNum) {
                 if (fName.equals("")) {
@@ -90,13 +99,6 @@ public class UpdateRecordButtonListener implements ActionListener {
                 break;
             }
         }
-        String[] newValue = {id, fName, lName, age, city};
-
-        executable.update(idNum, newValue, personList, filename);
-
-        listenerController.getTable().redrawTable(filename, executable);
-
-        listenerController.setTextFieldEmpty(idTextField, fNameTextField,
-                lNameTextField, ageTextField, cityTextField);
+        return new String[] {id, fName, lName, age, city};
     }
 }

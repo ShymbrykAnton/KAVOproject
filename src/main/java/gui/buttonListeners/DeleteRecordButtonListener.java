@@ -44,7 +44,7 @@ public class DeleteRecordButtonListener implements ActionListener {
 
         List<Person> personList = executable.read(filename);
 
-        long id = 0;
+        long id;
         if (!idTextField.getText().equals("")) {
             try {
                 id = Long.parseLong(idTextField.getText());
@@ -64,9 +64,7 @@ public class DeleteRecordButtonListener implements ActionListener {
 
         executable.delete(id, personList, filename);
 
-        listenerController.getTable().redrawTable(filename, executable);
-
-        listenerController.setTextFieldEmpty(idTextField, fNameTextField,
-                lNameTextField, ageTextField, cityTextField);
+        listenerController.getTable().redrawTable();
+        listenerController.setTextFieldEmpty(idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField);
     }
 }

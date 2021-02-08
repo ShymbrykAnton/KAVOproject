@@ -9,10 +9,9 @@ import util.Constants;
 import java.util.*;
 
 public class GraphDB implements IDatabaseController {
-    static Driver driver;
+    private Driver driver;
 
-    //зачем статик?
-    private static Driver getDriver() {
+    private Driver getDriver() {
         driver = GraphDatabase.driver(
                 Constants.GraphDB.CONNECTION_URL,
                 AuthTokens.basic(Constants.GraphDB.LOGIN_DB, Constants.GraphDB.PASSWORD_DB)

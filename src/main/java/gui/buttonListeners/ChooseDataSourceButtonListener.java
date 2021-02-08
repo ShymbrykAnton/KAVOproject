@@ -13,7 +13,6 @@ import java.util.Locale;
 import static util.Constants.Messages.*;
 import static util.Constants.View.*;
 
-
 public class ChooseDataSourceButtonListener implements ActionListener {
     private final MenuBar menuBar;
     private final ListenerController listenerController;
@@ -63,10 +62,6 @@ public class ChooseDataSourceButtonListener implements ActionListener {
         listenerController.setExecutable(executable);
         listenerController.setFilename(filename);
 
-        listenerController.getTable()
-                .redrawTable(
-                        listenerController.getFilename(),
-                        listenerController.getExecutable()
-                );
+        listenerController.getTable().redrawTable();
     }
 }

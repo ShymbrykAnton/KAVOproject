@@ -1,6 +1,5 @@
 package gui.view;
 
-import blogic.filetype.executor.Executable;
 import blogic.model.Person;
 import gui.buttonListeners.controller.ListenerController;
 import util.PersonComparator;
@@ -35,7 +34,6 @@ public class Table {
                 new Object[][]{},
                 new Object[]{ID, FIRST_NAME, LAST_NAME, AGE, CITY}
         );
-
         for (Person person : personList) {
             defaultTableModel.addRow(
                     new String[]{
@@ -48,14 +46,13 @@ public class Table {
             );
         }
         JTable defaultTable = new JTable(defaultTableModel);
-
         defaultTable.setFillsViewportHeight(true);
         createScrollPane(defaultTable);
 
         frame.add(scrollPane);
     }
 
-    public void redrawTable(String fileName, Executable executable) {
+    public void redrawTable() {
         frame.remove(this.scrollPane);
         drawTable();
     }

@@ -36,13 +36,13 @@ public class CsvConverter implements IFileTypeConverter {
                 .collect(Collectors.joining("\n"));
     }
 
-    public String convertToCSV(String[] data) {
+    private String convertToCSV(String[] data) {
         return Stream.of(data)
                 .map(this::escapeSpecialCharacters)
                 .collect(Collectors.joining(","));
     }
 
-    public String escapeSpecialCharacters(String data) {
+    private String escapeSpecialCharacters(String data) {
         String escapedData = data.replaceAll("\\R", " ");
 
         if (data.contains(",") || data.contains("\"") || data.contains("'")) {

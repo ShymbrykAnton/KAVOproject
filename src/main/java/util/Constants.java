@@ -88,7 +88,7 @@ public class Constants {
     public static class PostgreSQL {
         public final static String CONNECTION_URL = "jdbc:postgresql://localhost:5432/person";
         public final static String LOGIN_DB = "postgres";
-        public final static String PASSWORD_DB = "1234";
+        public final static String PASSWORD_DB = "11.04shekel1948";
         public final static String DRIVER_NAME = "org.postgresql.Driver";
     }
 
