@@ -7,8 +7,7 @@ import java.util.List;
 
 
 public interface IFileTypeConverter {
-
-
+    
     String getStrFromPersons(List<Person> persons);
 
     List<Person> getPersonsFromString(String strPersons);

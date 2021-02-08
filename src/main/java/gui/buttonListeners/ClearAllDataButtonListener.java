@@ -1,15 +1,11 @@
 package gui.buttonListeners;
 
 import blogic.filetype.executor.Executable;
-import blogic.model.Person;
 import gui.buttonListeners.controller.ListenerController;
-import gui.view.Table;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import static util.Constants.Messages.*;
 
@@ -34,9 +30,7 @@ public class ClearAllDataButtonListener implements ActionListener {
 
         if (option == JOptionPane.YES_OPTION) {
             executable.clearAll(filename);
-            listenerController
-                    .getTable()
-                    .redrawTable(filename, executable);
+            listenerController.getTable().redrawTable();
         }
     }
 }

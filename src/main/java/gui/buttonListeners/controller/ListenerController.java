@@ -18,7 +18,6 @@ public class ListenerController {
 
     public ListenerController(JFrame frame) {
         table = new Table(frame,this);
-
     }
 
     public void setFilename(String filename) {

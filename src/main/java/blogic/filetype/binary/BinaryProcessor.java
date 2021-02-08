@@ -27,21 +27,17 @@ public class BinaryProcessor implements Executable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public List<Person> read(String fileName) {
         FileInputStream fis;
         List<Person> person1 = new ArrayList<>();
-
         try {
             fis = new FileInputStream(fileName);
-
             ObjectInputStream ois = new ObjectInputStream(fis);
             @SuppressWarnings("unchecked")
             List<Person> person = (List<Person>) ois.readObject();
-
             return person;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

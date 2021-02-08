@@ -51,7 +51,8 @@ public class CreateNewRecordButtonListener implements ActionListener {
         String firstName = fNameTextField.getText();
         String lastName = lNameTextField.getText();
         int age = Integer.parseInt((ageTextField.getText()));
-        //надо протестить
+        String city = cityTextField.getText();
+
         try {
             fileHelper.idValidationForCreate(personList, id);
             fileHelper.ageValidation(age);
@@ -59,8 +60,6 @@ public class CreateNewRecordButtonListener implements ActionListener {
             JOptionPane.showMessageDialog(new Label(), exception.getMessage(), Constants.Messages.ERROR, JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        String city = cityTextField.getText();
 
         if (!fileHelper.fileExists(filename)) {
             personList = new ArrayList<>();
@@ -72,8 +71,7 @@ public class CreateNewRecordButtonListener implements ActionListener {
 
         executable.create(filename, personList);
 
-        listenerController.getTable().redrawTable(filename, executable);
-        listenerController.setTextFieldEmpty(idTextField, fNameTextField,
-                lNameTextField, ageTextField, cityTextField);
+        listenerController.getTable().redrawTable();
+        listenerController.setTextFieldEmpty(idTextField, fNameTextField, lNameTextField, ageTextField, cityTextField);
     }
 }
