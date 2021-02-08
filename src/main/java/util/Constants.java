@@ -24,6 +24,7 @@ public class Constants {
         public final static String CSV = "Csv";
         public final static String XML = "Xml";
         public final static String YAML = "Yaml";
+        public final static String YOUR_DB = "Your database: %s";
     }
 
     public static class Messages {
@@ -42,6 +43,7 @@ public class Constants {
         public final static String LABEL_FORMAT = "%s: ";
         public static final String ILLEGAL_PERSON_ID = "This id is busy.";
         public static final String ILLEGAL_AGE = "Incorrect age, max age = 100.";
+        public static final String ERROR = "Error";
     }
 
     public static class Errors {
@@ -127,7 +129,7 @@ public class Constants {
 
     }
 
-    public static class MongoDB{
+    public static class MongoDB {
         public final static String HOST = "localhost";
         public final static int PORT = 27017;
         public final static int DEFAULT_VALUE = 0;
@@ -142,10 +144,11 @@ public class Constants {
 
     }
 
-    public static class Redis{
+    public static class Redis {
         public static final String JEDIS = "localhost";
         public static final String KEY = "persons";
-        public static final String REGEX = "\\s";
+        public static final String SEPARATOR = "\u27a1";
+        public static final String REGEX = "\\u27a1";
     }
 
 }

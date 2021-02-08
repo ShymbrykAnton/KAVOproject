@@ -86,10 +86,7 @@ public class UpdateRecordButtonListener implements ActionListener {
 
         listenerController.getTable().redrawTable(filename, executable);
 
-        idTextField.setText("");
-        fNameTextField.setText("");
-        lNameTextField.setText("");
-        ageTextField.setText("");
-        cityTextField.setText("");
+        listenerController.setTextFieldEmpty(idTextField, fNameTextField,
+                lNameTextField, ageTextField, cityTextField);
     }
 }

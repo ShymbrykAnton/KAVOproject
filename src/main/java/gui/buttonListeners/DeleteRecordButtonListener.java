@@ -13,10 +13,23 @@ import java.util.List;
 
 public class DeleteRecordButtonListener implements ActionListener {
     private final JTextField idTextField;
+    private final JTextField fNameTextField;
+    private final JTextField lNameTextField;
+    private final JTextField ageTextField;
+    private final JTextField cityTextField;
     private final ListenerController listenerController;
 
-    public DeleteRecordButtonListener(JTextField idTextField, ListenerController listenerController) {
+    public DeleteRecordButtonListener(JTextField idTextField,
+                                      JTextField fNameTextField,
+                                      JTextField lNameTextField,
+                                      JTextField ageTextField,
+                                      JTextField cityTextField,
+                                      ListenerController listenerController) {
         this.idTextField = idTextField;
+        this.fNameTextField = fNameTextField;
+        this.lNameTextField = lNameTextField;
+        this.ageTextField = ageTextField;
+        this.cityTextField = cityTextField;
         this.listenerController = listenerController;
     }
 
@@ -36,6 +49,7 @@ public class DeleteRecordButtonListener implements ActionListener {
 
         listenerController.getTable().redrawTable(filename,executable);
 
-        idTextField.setText("");
+        listenerController.setTextFieldEmpty(idTextField, fNameTextField,
+                lNameTextField, ageTextField, cityTextField);
     }
 }

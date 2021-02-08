@@ -94,7 +94,12 @@ public class MainMenu extends Component {
         JButton buttonDelete = new JButton(DELETE);//creating instance of JButton
         buttonDelete.setBounds(750, 250, 100, 40);
 
-        ActionListener deleteActionListener = new DeleteRecordButtonListener(idTextField, listenerController);
+        ActionListener deleteActionListener = new DeleteRecordButtonListener(idTextField,
+                fNameTextField,
+                lNameTextField,
+                ageTextField,
+                cityTextField,
+                listenerController);
         buttonDelete.addActionListener(deleteActionListener);
 
         JButton buttonClearAll = new JButton(CLEAR_ALL);

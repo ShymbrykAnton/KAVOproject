@@ -3,6 +3,7 @@ package gui.buttonListeners;
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
 import gui.buttonListeners.controller.ListenerController;
+import util.Constants;
 import util.io.FileHelper;
 
 import javax.swing.*;
@@ -44,17 +45,7 @@ public class CreateNewRecordButtonListener implements ActionListener {
         String filename = listenerController.getFilename();
         Executable executable = listenerController.getExecutable();
 
-        String format = filename.substring(filename.lastIndexOf('.') + 1);
-        List<Person> personList;
-        if (format.equals(MY_SQL)
-                || format.equals(POSTGRE_SQL) || format.equals(CASSANDRA)
-                || format.equals(GRAPH_DB) || format.equals(H2)
-                || format.equals(MONGO_DB) || format.equals(REDIS)
-                || fileHelper.fileExists(filename)) {
-            personList = executable.read(filename);
-        } else {
-            personList = new ArrayList<>();
-        }
+        List<Person> personList = listenerController.getPersonList(fileHelper);
 
         long id = Long.parseLong(idTextField.getText());
         String firstName = fNameTextField.getText();
@@ -65,10 +56,9 @@ public class CreateNewRecordButtonListener implements ActionListener {
             fileHelper.idValidationForCreate(personList, id);
             fileHelper.ageValidation(age);
         } catch (IllegalArgumentException exception) {
-            JOptionPane.showMessageDialog(new Label(),exception.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new Label(), exception.getMessage(), Constants.Messages.ERROR, JOptionPane.ERROR_MESSAGE);
             return;
         }
-
 
         String city = cityTextField.getText();
 
@@ -83,11 +73,7 @@ public class CreateNewRecordButtonListener implements ActionListener {
         executable.create(filename, personList);
 
         listenerController.getTable().redrawTable(filename, executable);
-
-        idTextField.setText("");
-        fNameTextField.setText("");
-        lNameTextField.setText("");
-        ageTextField.setText("");
-        cityTextField.setText("");
+        listenerController.setTextFieldEmpty(idTextField, fNameTextField,
+                lNameTextField, ageTextField, cityTextField);
     }
 }
