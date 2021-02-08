@@ -19,12 +19,7 @@ public class MainMenu extends Component {
 
         ListenerController listenerController = new ListenerController(frame);
 
-        listenerController
-                .getTable()
-                .drawTable(
-                        listenerController.getFilename(),
-                        listenerController.getExecutable()
-                );
+        listenerController.getTable().drawTable();
 
         MenuBar mb = new MenuBar();
 

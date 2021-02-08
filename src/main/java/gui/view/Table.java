@@ -2,17 +2,16 @@ package gui.view;
 
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
+import gui.buttonListeners.controller.ListenerController;
 import util.PersonComparator;
 import util.io.FileHelper;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.Constants.View.*;
-import static util.Constants.DataSource.*;
 
 
 public class Table {
@@ -20,26 +19,18 @@ public class Table {
     private final PersonComparator pc = new PersonComparator();
     private final JFrame frame;
     private JScrollPane scrollPane;
+    private final ListenerController listenerController;
 
-    public Table(JFrame frame) {
+    public Table(JFrame frame, ListenerController listenerController) {
         this.frame = frame;
+        this.listenerController = listenerController;
     }
 
-    public void drawTable(String fileName, Executable executable) {
-        List<Person> personList;
-        String format = fileName.substring(fileName.lastIndexOf('.') + 1);
+    public void drawTable() {
 
-        if (format.equals(MY_SQL) || format.equals(POSTGRE_SQL)
-                || format.equals(CASSANDRA) || format.equals(GRAPH_DB)
-                || format.equals(H2) || format.equals(MONGO_DB)
-                || format.equals(REDIS)
-                || fileHelper.fileExists(fileName)) {
+        List<Person> personList = listenerController.getPersonList(fileHelper);
+        personList.sort(pc);
 
-            personList = executable.read(fileName);
-            personList.sort(pc);
-        } else {
-            personList = new ArrayList<>();
-        }
         DefaultTableModel defaultTableModel = new DefaultTableModel(
                 new Object[][]{},
                 new Object[]{ID, FIRST_NAME, LAST_NAME, AGE, CITY}
@@ -66,7 +57,7 @@ public class Table {
 
     public void redrawTable(String fileName, Executable executable) {
         frame.remove(this.scrollPane);
-        drawTable(fileName, executable);
+        drawTable();
     }
 
     private void createScrollPane(JTable defaultTable) {

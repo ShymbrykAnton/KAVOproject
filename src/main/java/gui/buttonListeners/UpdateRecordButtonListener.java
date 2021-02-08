@@ -3,6 +3,7 @@ package gui.buttonListeners;
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
 import gui.buttonListeners.controller.ListenerController;
+import util.Constants;
 import util.io.FileHelper;
 
 import javax.swing.*;
@@ -43,25 +44,34 @@ public class UpdateRecordButtonListener implements ActionListener {
         String filename = listenerController.getFilename();
         Executable executable = listenerController.getExecutable();
 
-        List<Person> personList;
+        List<Person> personList = executable.read(filename);
+
 
         String id = idTextField.getText();
-        long idNum = Long.parseLong(id);
+
         String fName = fNameTextField.getText();
         String lName = lNameTextField.getText();
         String age = ageTextField.getText();
-        //надо протестить
-        if (!age.equals("")) {
+
+        long idNum = 0;
+        if (!ageTextField.getText().equals("") || !idTextField.getText().equals("")) {
             try {
+                idNum = Long.parseLong(id);
+                fileHelper.idValidationForUpdDel(personList, idNum);
                 fileHelper.ageValidation(Integer.parseInt(age));
             } catch (IllegalArgumentException exception) {
-                JOptionPane.showMessageDialog(new Label(), exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(new Label(), exception.getMessage(), Constants.Messages.ERROR, JOptionPane.ERROR_MESSAGE);
+                listenerController.setTextFieldEmpty(idTextField, fNameTextField,
+                        lNameTextField, ageTextField, cityTextField);
                 return;
             }
+        } else {
+            JOptionPane.showMessageDialog(new Label(), Constants.Messages.ID_FIELD_IS_EMPTY, Constants.Messages.ERROR, JOptionPane.ERROR_MESSAGE);
+            listenerController.setTextFieldEmpty(idTextField, fNameTextField,
+                    lNameTextField, ageTextField, cityTextField);
+            return;
         }
-
         String city = cityTextField.getText();
-        personList = executable.read(filename);
 
         for (Person iterPerson : personList) {
             if (iterPerson.getId() == idNum) {

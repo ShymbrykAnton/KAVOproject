@@ -1,6 +1,7 @@
 package util.io;
 
 import blogic.model.Person;
+import util.Constants;
 
 import java.io.*;
 import java.util.List;
@@ -22,13 +23,15 @@ public class FileHelper {
 
     public void idValidationForCreate(List<Person> personList, long id) throws IllegalArgumentException {
         if (isIdLegal(personList, id)) {
+            throw new IllegalArgumentException(ILLEGAL_PERSON_ID_IS_BUSY);
+        } else if (id < 0) {
             throw new IllegalArgumentException(ILLEGAL_PERSON_ID);
         }
     }
 
     public void idValidationForUpdDel(List<Person> personList, long id) throws IllegalArgumentException {
         if (!isIdLegal(personList, id)) {
-            throw new IllegalArgumentException(ILLEGAL_PERSON_ID);
+            throw new IllegalArgumentException(PERSON_ID_NOT_FOUND);
         }
     }
 
