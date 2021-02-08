@@ -34,4 +34,9 @@ public class DbProcessor implements Executable {
     public void delete(long id, List<Person> personList, String filename) {
         iDatabaseController.removePersonsFromList(id);
     }
+
+    @Override
+    public void clearAll(String filename) {
+        iDatabaseController.clearAll(filename);
+    }
 }

@@ -89,4 +89,13 @@ public class MongoDB implements IDatabaseController {
         getCollection().deleteOne(filter);
         getMongoClient().close();
     }
+
+    @Override
+    public void clearAll(String filename) {
+        for (Document document : getCollection().find()) {
+            Bson filter = eq(Constants.MongoDB.ID_FIELD, document.getLong(Constants.MongoDB.ID_FIELD));
+            getCollection().deleteOne(filter);
+        }
+        getMongoClient().close();
+    }
 }

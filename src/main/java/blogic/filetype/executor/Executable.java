@@ -13,4 +13,6 @@ public interface Executable {
     void update(long id, String[] newValue, List<Person> personList, String filename);
 
     void delete(long id, List<Person> personList, String filename);
+
+    void clearAll(String filename);
 }

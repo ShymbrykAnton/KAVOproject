@@ -71,17 +71,23 @@ public class Redis implements IDatabaseController {
 
     @Override
     public void removePersonsFromList(long id) {
-
         for (int count = 0; jedis.lindex(Constants.Redis.KEY, count) != null; count++) {
-
             String read = jedis.lindex(Constants.Redis.KEY, count);
             String[] arrayRead = read.split(Constants.Redis.REGEX);
-
             if (Integer.parseInt(arrayRead[0]) == id) {
                 jedis.lrem(Constants.Redis.KEY, count, read);
+                break;
             }
         }
         jedis.close();
+    }
+
+    @Override
+    public void clearAll(String filename) {
+        int length = Math.toIntExact(jedis.llen(Constants.Redis.KEY));
+        for (int count = 0; count<=length; count++) {
+            jedis.lpop(Constants.Redis.KEY);
+        }
     }
 }
 

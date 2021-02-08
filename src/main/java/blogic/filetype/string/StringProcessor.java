@@ -5,6 +5,7 @@ import blogic.filetype.string.fileTypeConverter.IFileTypeConverter;
 import util.io.FileHelper;
 import blogic.model.Person;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StringProcessor implements Executable {
@@ -35,5 +36,10 @@ public class StringProcessor implements Executable {
     public void delete(long id, List<Person> personList, String filename) {
         personList = converter.removePersonsFromList(id, personList);
         create(filename, personList);
+    }
+
+    @Override
+    public void clearAll(String filename) {
+        create(filename,new ArrayList<>());
     }
 }

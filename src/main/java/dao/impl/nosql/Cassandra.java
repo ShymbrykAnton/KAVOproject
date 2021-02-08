@@ -86,11 +86,20 @@ public class Cassandra implements IDatabaseController {
     public void removePersonsFromList(long id) {
 
         PreparedStatement preparedStatement = getSession().prepare(Constants.Cassandra.DELETE);
-
         BoundStatement boundStatement = new BoundStatement(preparedStatement);
-
         session.execute(boundStatement.bind((int) id));
+        cluster.close();
+    }
 
+    @Override
+    public void clearAll(String filename) {
+        ResultSet resultset = getSession().execute(Constants.Cassandra.SELECT);
+        PreparedStatement preparedStatement = getSession().prepare(Constants.Cassandra.DELETE);
+        BoundStatement boundStatement = new BoundStatement(preparedStatement);
+        for (Row row : resultset) {
+            int id = (row.getInt(Constants.Cassandra.ID_FIELD));
+            session.execute(boundStatement.bind(id));
+        }
         cluster.close();
     }
 }
