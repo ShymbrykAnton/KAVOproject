@@ -16,9 +16,8 @@ public class ListenerController {
     private Executable executable;
     private final Table table;
 
-
     public ListenerController(JFrame frame) {
-        table = new Table(frame);
+        table = new Table(frame,this);
 
     }
 
