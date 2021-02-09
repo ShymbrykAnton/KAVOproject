@@ -36,6 +36,7 @@ public class Constants {
         public final static String CLEAR_FILE = "Clearing file";
         public final static String CLEAR_WARNING = "Do you really want to delete all data in %s.";
         public final static String EXIT_CONFORMATION = "Are you sure you want to close the application?";
+        public final static String EXIT_CONFORMATION_WOLFS = "REMEMBER, BROTHER! IF A WOLF HOWLS IN PAIN, THEN IT HURTS.";
         public final static String LABEL_FORMAT = "%s: ";
         public static final String ILLEGAL_PERSON_ID_IS_BUSY = "This id is busy.";
         public static final String ILLEGAL_PERSON_ID = "Id cannot be negative.";
