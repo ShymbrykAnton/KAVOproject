@@ -1,18 +1,20 @@
 package gui.buttonListeners;
 
+import gui.windowListenersControllers.WindowExitWolfsController;
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
-import static util.Constants.Messages.*;
-
 public class ButtonPushActionListener implements ActionListener {
-    private Clip clip;
+     Clip clip;
+     JFrame jFrame;
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        JFrame jFrame = new JFrame();
+        jFrame = new JFrame();
         JLabel imgLabel = new JLabel(new ImageIcon("src/wolfs.jpg"));
         imgLabel.setBounds(0, 0, 575, 400);
 
@@ -43,22 +45,9 @@ public class ButtonPushActionListener implements ActionListener {
         jFrame.setSize(575, 400);
         jFrame.setLocationRelativeTo(null);
 
+        WindowListener exitWindowListener = new WindowExitWolfsController(jFrame,clip);
+        jFrame.addWindowListener(exitWindowListener);
 
-        jFrame.addWindowListener(new WindowAdapter() {
-
-            @Override
-           public void windowClosing(WindowEvent e) {
-
-                int res = JOptionPane.showConfirmDialog(new JLabel(), EXIT_CONFORMATION_WOLFS,
-                        CONFIRM_WINDOW, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (res == JOptionPane.YES_OPTION) {
-                    clip.close();
-                    jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                }   else {
-                    jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                }
-            }
-        });
     }
 }
 //    ActionListener exitActionListener1 = new ExitButtonListener();

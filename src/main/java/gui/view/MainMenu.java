@@ -2,10 +2,13 @@ package gui.view;
 
 import gui.buttonListeners.*;
 import gui.buttonListeners.controller.ListenerController;
+import gui.windowListenersControllers.WindowExitProgramController;
+import gui.windowListenersControllers.WindowExitWolfsController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 
 import static util.Constants.View.*;
 import static util.Constants.DataSource.*;
@@ -106,7 +109,7 @@ public class MainMenu extends Component {
         JButton buttonExit = new JButton(EXIT);
         buttonExit.setBounds(725, 450, 100, 50);
 
-        ActionListener exitActionListener = new ExitButtonListener();
+        ActionListener exitActionListener = new ExitButtonListener(frame);
         buttonExit.addActionListener(exitActionListener);
 
         JButton buttonHomie = new JButton();
@@ -178,7 +181,10 @@ public class MainMenu extends Component {
         frame.setVisible(true);
         frame.setResizable(false);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        WindowListener exitWindowListener = new WindowExitProgramController(frame);
+        frame.addWindowListener(exitWindowListener);
+
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(900, 600);
 
         frame.setLocationRelativeTo(null);
