@@ -1,7 +1,6 @@
 package gui.buttonListeners;
 
 import gui.windowListenersControllers.WindowExitWolfsController;
-
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -49,23 +48,6 @@ public class ButtonPushActionListener implements ActionListener {
         WindowListener exitWindowListener = new WindowExitWolfsController(jFrame,clip);
         jFrame.addWindowListener(exitWindowListener);
 
-
-
-//        jFrame.addWindowListener(new WindowAdapter() {
-//
-//            @Override
-//           public void windowClosing(WindowEvent e) {
-//
-//                int res = JOptionPane.showConfirmDialog(new JLabel(), EXIT_CONFORMATION_WOLFS,
-//                        CONFIRM_WINDOW, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-//                if (res == JOptionPane.YES_OPTION) {
-//                    clip.close();
-//                    jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//                }   else {
-//                    jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-//                }
-//            }
-//        });
     }
 }
 //    ActionListener exitActionListener1 = new ExitButtonListener();
