@@ -19,13 +19,13 @@ public class YamlConverter implements IFileTypeConverter {
 
     @Override
     public String getStrFromPersons(List<Person> persons) {
-        String perssonString = "";
+        String personString = "";
         try {
-            perssonString = mapper.writeValueAsString(persons);
+            personString = mapper.writeValueAsString(persons);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return perssonString;
+        return personString;
     }
 
     @Override

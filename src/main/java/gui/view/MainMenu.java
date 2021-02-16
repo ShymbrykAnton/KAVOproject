@@ -3,7 +3,6 @@ package gui.view;
 import gui.buttonListeners.*;
 import gui.buttonListeners.controller.ListenerController;
 import gui.windowListenersControllers.WindowExitProgramController;
-import gui.windowListenersControllers.WindowExitWolfsController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +61,7 @@ public class MainMenu extends Component {
         JTextField cityTextField = new JTextField();
         cityTextField.setBounds(550, 220, 300, 30);
 //======================================================Создание кнопок=================================================
-        JButton buttonCreate = new JButton(CREATE);//creating instance of JButton
+        JButton buttonCreate = new JButton(CREATE);
         buttonCreate.setBounds(550, 250, 100, 40);
 
         ActionListener createActionListener = new CreateNewRecordButtonListener(
@@ -76,7 +75,7 @@ public class MainMenu extends Component {
 
         buttonCreate.addActionListener(createActionListener);
 
-        JButton buttonUpdate = new JButton(UPDATE);//creating instance of JButton
+        JButton buttonUpdate = new JButton(UPDATE);
         buttonUpdate.setBounds(650, 250, 100, 40);
 
         ActionListener updateActionListener = new UpdateRecordButtonListener(
@@ -89,7 +88,7 @@ public class MainMenu extends Component {
         );
         buttonUpdate.addActionListener(updateActionListener);
 
-        JButton buttonDelete = new JButton(DELETE);//creating instance of JButton
+        JButton buttonDelete = new JButton(DELETE);
         buttonDelete.setBounds(750, 250, 100, 40);
 
         ActionListener deleteActionListener = new DeleteRecordButtonListener(idTextField,
@@ -101,19 +100,19 @@ public class MainMenu extends Component {
         buttonDelete.addActionListener(deleteActionListener);
 
         JButton buttonClearAll = new JButton(CLEAR_ALL);
-        buttonClearAll.setBounds(50, 450, 100, 50);
+        buttonClearAll.setBounds(50, 300, 100, 50);
 
         ActionListener clearAllActionListener = new ClearAllDataButtonListener(listenerController);
         buttonClearAll.addActionListener(clearAllActionListener);
 
         JButton buttonExit = new JButton(EXIT);
-        buttonExit.setBounds(725, 450, 100, 50);
+        buttonExit.setBounds(750, 300, 100, 50);
 
         ActionListener exitActionListener = new ExitButtonListener(frame);
         buttonExit.addActionListener(exitActionListener);
 
         JButton buttonHomie = new JButton();
-        buttonHomie.setBounds(450, 400, 7, 7);
+        buttonHomie.setBounds(850, 10, 5, 5);
         ActionListener buttonActionListener = new ButtonPushActionListener();
         buttonHomie.addActionListener(buttonActionListener);
 //======================================================================================================================
@@ -155,7 +154,6 @@ public class MainMenu extends Component {
         ActionListener chooseDataSource = new ChooseDataSourceButtonListener(mb, listenerController);
         dbsFiles.addActionListener(chooseDataSource);
 
-
         frame.add(tableLabel);
         frame.add(idLabel);
         frame.add(fNameLabel);
@@ -180,40 +178,9 @@ public class MainMenu extends Component {
         frame.setLayout(null);
         frame.setVisible(true);
         frame.setResizable(false);
-
         WindowListener exitWindowListener = new WindowExitProgramController(frame);
         frame.addWindowListener(exitWindowListener);
-
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(900, 600);
-
+        frame.setSize(900, 440);
         frame.setLocationRelativeTo(null);
-
-//======================================================================================================================
-//        frame.getContentPane().setBackground(Color.WHITE);
-
-//////////////////////////////////Закрытие приложения через "крестик"/////////////////////
-//        frame.addWindowListener(new WindowAdapter() {
-//            @Override
-//            public void windowClosing(WindowEvent e) {
-//                Exit();
-////                frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-//
-//            }
-//        });
-////////////////////////////////////////////////////////////////////////////////////////////
-
     }
-
-
-////////////////////////////////Метод закрытия приложения////////////////////////////////////
-//    private void Exit() {
-//        int res = JOptionPane.showConfirmDialog(MainMenu.this,
-//                "Are you sure you want to close the application?",
-//                TITLE_confirm, JOptionPane.YES_NO_OPTION,
-//                JOptionPane.WARNING_MESSAGE);
-//        if (res == JOptionPane.YES_OPTION) {
-//            System.exit(0);
-//        }
-
 }

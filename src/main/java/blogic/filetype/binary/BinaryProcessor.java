@@ -3,9 +3,7 @@ package blogic.filetype.binary;
 import blogic.filetype.executor.Executable;
 import blogic.model.Person;
 import util.update.Update;
-
 import java.io.IOException;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

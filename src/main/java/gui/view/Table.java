@@ -63,7 +63,6 @@ public class Table {
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS
         );
-
-        this.scrollPane.setBounds(50, 100, 400, 200);
+        this.scrollPane.setBounds(50, 90, 400, 200);
     }
 }

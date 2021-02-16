@@ -13,8 +13,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static util.Constants.DataSource.*;
-
 
 public class CreateNewRecordButtonListener implements ActionListener {
     private final FileHelper fileHelper = new FileHelper();

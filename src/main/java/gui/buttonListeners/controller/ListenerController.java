@@ -51,7 +51,6 @@ public class ListenerController {
     }
 
     public List<Person> getPersonList (FileHelper fileHelper){
-
         String format = filename.substring(filename.lastIndexOf('.') + 1);
         List<Person> personList;
         if (format.equals(MY_SQL)

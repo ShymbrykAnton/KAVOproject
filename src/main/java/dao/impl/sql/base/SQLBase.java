@@ -29,11 +29,8 @@ public abstract class SQLBase implements IDatabaseController {
     public List<Person> readFromDatabase() {
 
         List<Person> personList = new ArrayList<>();
-
         try (Statement statement = getConnection().createStatement()) {
-
             ResultSet resultSet = statement.executeQuery(Constants.SQLBaseQueries.SELECT);
-
             while (resultSet.next()) {
                 Person person = new Person();
                 person.setId(resultSet.getLong(1));
@@ -51,7 +48,6 @@ public abstract class SQLBase implements IDatabaseController {
     }
 
     public void updateDataInPerson(long id, String[] newValue) {
-
         try (PreparedStatement ps = getConnection().prepareStatement(Constants.SQLBaseQueries.UPDATE)) {
             ps.setString(1, newValue[1]);
             ps.setString(2, newValue[2]);
@@ -65,7 +61,6 @@ public abstract class SQLBase implements IDatabaseController {
     }
 
     public void removePersonsFromList(long id) {
-
         try (PreparedStatement ps = getConnection().prepareStatement(Constants.SQLBaseQueries.DELETE)) {
             ps.setLong(1, id);
             ps.executeUpdate();
@@ -76,7 +71,7 @@ public abstract class SQLBase implements IDatabaseController {
 
     @Override
     public void clearAll(String filename) {
-        try (PreparedStatement ps = getConnection().prepareStatement("DELETE FROM persons WHERE id>0")) {
+        try (PreparedStatement ps = getConnection().prepareStatement(Constants.SQLBaseQueries.CLEAR_ALL)) {
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -70,6 +70,7 @@ public class Constants {
         public final static String SELECT = "SELECT * FROM persons";
         public final static String UPDATE = "UPDATE persons SET first_name=?,last_name=?,age=?,city=? WHERE id = ?";
         public final static String DELETE = "DELETE FROM persons WHERE id = ?";
+        public final static String CLEAR_ALL = "DELETE FROM persons WHERE id>0";
     }
 
     public static class H2 {
@@ -107,7 +108,6 @@ public class Constants {
         public final static String LAST_NAME_FIELD = "last_name";
         public final static String AGE_FIELD = "age";
         public final static String CITY_FIELD = "city";
-
     }
 
     public static class GraphDB {
@@ -141,7 +141,6 @@ public class Constants {
         public final static String LAST_NAME_FIELD = "lname";
         public final static String AGE_FIELD = "age";
         public final static String CITY_FIELD = "city";
-
     }
 
     public static class Redis {
